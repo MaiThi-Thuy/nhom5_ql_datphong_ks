@@ -3,7 +3,7 @@ package vn.viettuts.qlks;
 import java.awt.EventQueue;
 
 import vn.viettuts.qlks.controller.LoginController;
-import vn.viettuts.qlsv.view.LoginView;
+import vn.viettuts.qlks.view.LoginView;
 
 public class App {
     public static void main(String[] args) {

@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import vn.viettuts.qlks.dao.UserDao;
-import vn.viettuts.qlsv.entity.User;
-import vn.viettuts.qlsv.view.LoginView;
-import vn.viettuts.qlsv.view.CustomerView;
+import vn.viettuts.qlks.entity.User;
+import vn.viettuts.qlks.view.LoginView;
+import vn.viettuts.qlks.view.CustomerView;
 
 public class LoginController {
     private UserDao userDao;

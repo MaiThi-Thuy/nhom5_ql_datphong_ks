@@ -8,8 +8,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import vn.viettuts.qlks.dao.CustomerDao;
-import vn.viettuts.qlsv.entity.Customer;
-import vn.viettuts.qlsv.view.CustomerView;
+import vn.viettuts.qlks.entity.Customer;
+import vn.viettuts.qlks.view.CustomerView;
 
 public class CustomerController {
     private CustomerDao customerDao;

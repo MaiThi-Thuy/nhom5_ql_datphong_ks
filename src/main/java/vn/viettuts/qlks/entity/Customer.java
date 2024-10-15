@@ -1,4 +1,4 @@
-package vn.viettuts.qlsv.entity;
+package vn.viettuts.qlks.entity;
 
 import java.io.Serializable;
 

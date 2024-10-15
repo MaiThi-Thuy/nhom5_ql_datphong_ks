@@ -47,14 +47,6 @@
       "address": "Hoa Binh",
       "cccd": "0123456789",
       "sdt": "0352613084"
-    },
-    {
-      "id": 7,
-      "name": "Nam",
-      "age": 20,
-      "address": "Xa qua",
-      "cccd": "0123456789",
-      "sdt": "0123458693"
     }
   ]
 }

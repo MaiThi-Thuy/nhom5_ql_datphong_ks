@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import vn.viettuts.qlsv.entity.Customer;
-import vn.viettuts.qlsv.entity.CustomerJSON;
+import vn.viettuts.qlks.entity.Customer;
+import vn.viettuts.qlks.entity.CustomerJSON;
 import vn.viettuts.qlks.utils.FileUtils;
 
 /**

@@ -1,6 +1,6 @@
 package vn.viettuts.qlks.dao;
 
-import vn.viettuts.qlsv.entity.User;
+import vn.viettuts.qlks.entity.User;
 
 public class UserDao {
     public boolean checkUser(User user) {

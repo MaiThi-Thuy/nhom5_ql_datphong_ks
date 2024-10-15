@@ -1,4 +1,4 @@
-package vn.viettuts.qlsv.view;
+package vn.viettuts.qlks.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
 
-import vn.viettuts.qlsv.entity.User;
+import vn.viettuts.qlks.entity.User;
 
 public class LoginView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;

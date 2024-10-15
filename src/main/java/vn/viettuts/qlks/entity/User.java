@@ -1,4 +1,4 @@
-package vn.viettuts.qlsv.entity;
+package vn.viettuts.qlks.entity;
 
 public class User {
     private String userName;

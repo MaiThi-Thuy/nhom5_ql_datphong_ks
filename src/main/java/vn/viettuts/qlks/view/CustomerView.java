@@ -1,4 +1,4 @@
-package vn.viettuts.qlsv.view;
+package vn.viettuts.qlks.view;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import vn.viettuts.qlsv.entity.Customer;
+import vn.viettuts.qlks.entity.Customer;
 
 public class CustomerView extends JFrame implements ActionListener, ListSelectionListener {
     private static final long serialVersionUID = 1L;

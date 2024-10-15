@@ -3,9 +3,9 @@ C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\controller\Customer
 C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\controller\LoginController.java
 C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\dao\CustomerDao.java
 C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\dao\UserDao.java
+C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\entity\Customer.java
+C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\entity\CustomerJSON.java
+C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\entity\User.java
 C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\utils\FileUtils.java
-C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlsv\entity\Customer.java
-C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlsv\entity\CustomerJSON.java
-C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlsv\entity\User.java
-C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlsv\view\CustomerView.java
-C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlsv\view\LoginView.java
+C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\view\CustomerView.java
+C:\Users\hieu7\Downloads\qlks\src\main\java\vn\viettuts\qlks\view\LoginView.java
