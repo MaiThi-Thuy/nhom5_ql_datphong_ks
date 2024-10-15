@@ -79,6 +79,7 @@ public class CustomerDao {
                 listCustomers.get(i).setAge(customer.getAge());
                 listCustomers.get(i).setAddress(customer.getAddress());
                 listCustomers.get(i).setCccd(customer.getCccd());
+                listCustomers.get(i).setSdt(customer.getSdt());
                 writeListCustomers(listCustomers);
                 break;
             }

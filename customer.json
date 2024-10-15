@@ -5,42 +5,56 @@
       "name": "Hieu",
       "age": 20,
       "address": "Hoa Binh",
-      "cccd": "0123476214"
+      "cccd": "0123476214",
+      "sdt": "0378452566"
     },
     {
       "id": 2,
       "name": "Son",
       "age": 20,
       "address": "Hoa Binh",
-      "cccd": "0129348174"
+      "cccd": "0129348174",
+      "sdt": "0378452566"
     },
     {
       "id": 3,
       "name": "Hoang",
       "age": 20,
       "address": "Son la",
-      "cccd": "1012041241"
+      "cccd": "1012041241",
+      "sdt": "0352613084"
     },
     {
       "id": 4,
       "name": "Nam Bui",
       "age": 30,
       "address": "Thanh Hoa",
-      "cccd": "0142312774"
+      "cccd": "0142312774",
+      "sdt": "0352613084"
     },
     {
       "id": 5,
       "name": "HieuNguyen",
       "age": 20,
       "address": "Xa Xoi",
-      "cccd": "9012348814"
+      "cccd": "9012348814",
+      "sdt": "0352613084"
     },
     {
       "id": 6,
       "name": "hieu",
       "age": 20,
       "address": "Hoa Binh",
-      "cccd": "0123456789"
+      "cccd": "0123456789",
+      "sdt": "0352613084"
+    },
+    {
+      "id": 7,
+      "name": "Nam",
+      "age": 20,
+      "address": "Xa qua",
+      "cccd": "0123456789",
+      "sdt": "0123458693"
     }
   ]
 }

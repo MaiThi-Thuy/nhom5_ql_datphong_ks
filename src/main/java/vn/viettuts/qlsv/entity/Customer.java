@@ -8,18 +8,20 @@ public class Customer implements Serializable {
     private String name;
     private byte age;
     private String address;
-    private String cccd; // điểm trung bình của sinh viên
+    private String cccd;
+    private String sdt; // Added sdt property
 
     public Customer() {
     }
 
-    public Customer(int id, String name, byte age, String address, String cccd) {
+    public Customer(int id, String name, byte age, String address, String cccd, String sdt) {
         super();
         this.id = id;
         this.name = name;
         this.age = age;
         this.address = address;
         this.cccd = cccd;
+        this.sdt = sdt; // Initialize sdt
     }
 
     public int getId() {
@@ -62,9 +64,17 @@ public class Customer implements Serializable {
         this.cccd = cccd;
     }
 
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
     @Override
     public String toString() {
         return "Customer [id=" + id + ", name=" + name + ", age=" + age +
-               ", address=" + address + ", cccd=" + cccd + "]";
+               ", address=" + address + ", cccd=" + cccd + ", sdt=" + sdt + "]"; // Include sdt in toString
     }
 }

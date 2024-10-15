@@ -204,7 +204,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customers[i][2] = list.get(i).getAge();
             customers[i][3] = list.get(i).getAddress();
             customers[i][4] = list.get(i).getCccd();
-            //customers[i][5] = list.get(i).getSdt();
+            customers[i][5] = list.get(i).getSdt();
         }
         customerTable.setModel(new DefaultTableModel(customers, columnNames));
     }
@@ -259,7 +259,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         ageField.setText("" + customer.getAge());
         addressTA.setText(customer.getAddress());
         cccdField.setText("" + customer.getCccd());
-        //sdtField.setText(customer.getSdt());
+        sdtField.setText(""+customer.getSdt());
         // enable Edit and Delete buttons
         editCustomerBtn.setEnabled(true);
         deleteCustomerBtn.setEnabled(true);
@@ -286,7 +286,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customer.setAge(Byte.parseByte(ageField.getText().trim()));
             customer.setAddress(addressTA.getText().trim());
             customer.setCccd(cccdField.getText().trim());
-            //customer.setSdt(sdtField.getText().trim());
+            customer.setSdt(sdtField.getText().trim());
             return customer;
         } catch (Exception e) {
             showMessage(e.getMessage());
