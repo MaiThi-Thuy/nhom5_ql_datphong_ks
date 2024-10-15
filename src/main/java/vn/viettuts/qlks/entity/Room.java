@@ -1,24 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package vn.viettuts.qlks.entity;
 
-/**
- *
- * @author hieu7
- */
-public class Room {
+import java.io.Serializable;
+
+public class Room implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
-    private String name;
     private String type;
-    private int price;
+    private double price;
     private boolean status;
-    
-    public Room(){}
-    public Room(int id, String name, String type, int price, boolean status) {
+
+    public Room() {
+    }
+
+    public Room(int id, String type, double price, boolean status) {
         this.id = id;
-        this.name = name;
         this.type = type;
         this.price = price;
         this.status = status;
@@ -32,14 +27,6 @@ public class Room {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getType() {
         return type;
     }
@@ -48,11 +35,11 @@ public class Room {
         this.type = type;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -66,7 +53,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", status=" + status + '}';
+        return "Room{" + "id=" + id + ", type=" + type + ", price=" + price + ", status=" + status + '}';
     }
     
+
 }

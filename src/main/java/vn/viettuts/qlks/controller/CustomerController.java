@@ -6,11 +6,10 @@ import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.entity.Customer;
 import vn.viettuts.qlks.view.CustomerView;
-
+import vn.viettuts.qlks.view.RoomView;
 public class CustomerController {
     private CustomerDao customerDao;
     private CustomerView customerView;
@@ -26,6 +25,7 @@ public class CustomerController {
         //view.addSortCustomerCCCDListener(new SortCustomerCCCDListener());
         view.addSortCustomerNameListener(new SortCustomerNameListener());
         view.addListCustomerSelectionListener(new ListCustomerSelectionListener());
+        view.addNavigateToRoomViewListener( new NavigateRoomListener());
     }
 
     public void showCustomerView() {
@@ -125,7 +125,15 @@ public class CustomerController {
             customerView.showListCustomers(customerDao.getListCustomers());
         }
     }
-
+    class NavigateRoomListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RoomView roomView = new RoomView();
+            RoomController roomController = new RoomController(roomView);
+            roomController.showRoomView();
+            customerView.setVisible(false);
+        }
+    }
     /**
      * Lớp ListCustomerSelectionListener 
      * chứa cài đặt cho sự kiện chọn customer trong bảng customer
