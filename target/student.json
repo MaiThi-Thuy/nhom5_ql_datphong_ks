@@ -1,0 +1,32 @@
+{
+  "customer": [
+    {
+      "id": 1,
+      "name": "Hieu",
+      "age": 20,
+      "address": "Hoa Binh",
+      "cccd": 9.0
+    },
+    {
+      "id": 2,
+      "name": "Son",
+      "age": 20,
+      "address": "Hoa Binh",
+      "cccd": 9.2
+    },
+    {
+      "id": 3,
+      "name": "Hoang",
+      "age": 0,
+      "address": "Son la",
+      "cccd": 7.0
+    },
+    {
+      "id": 4,
+      "name": "Nam Bui",
+      "age": 30,
+      "address": "Thanh Hoa",
+      "cccd": 0.0
+    }
+  ]
+}

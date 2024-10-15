@@ -1,0 +1,46 @@
+{
+  "customer": [
+    {
+      "id": 1,
+      "name": "Hieu",
+      "age": 20,
+      "address": "Hoa Binh",
+      "cccd": "0123476214"
+    },
+    {
+      "id": 2,
+      "name": "Son",
+      "age": 20,
+      "address": "Hoa Binh",
+      "cccd": "0129348174"
+    },
+    {
+      "id": 3,
+      "name": "Hoang",
+      "age": 20,
+      "address": "Son la",
+      "cccd": "1012041241"
+    },
+    {
+      "id": 4,
+      "name": "Nam Bui",
+      "age": 30,
+      "address": "Thanh Hoa",
+      "cccd": "0142312774"
+    },
+    {
+      "id": 5,
+      "name": "HieuNguyen",
+      "age": 20,
+      "address": "Xa Xoi",
+      "cccd": "9012348814"
+    },
+    {
+      "id": 6,
+      "name": "hieu",
+      "age": 20,
+      "address": "Hoa Binh",
+      "cccd": "0123456789"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customers>
+    <customer>
+        <id>3</id>
+        <name>Dai Bang</name>
+        <age>24</age>
+        <address>Ha Nam</address>
+        <cccd>9.0</cccd>
+    </customer>
+    <customer>
+        <id>2</id>
+        <name>Vinh The Mac</name>
+        <age>23</age>
+        <address>Vinh Phuc</address>
+        <cccd>9.5</cccd>
+    </customer>
+    <customer>
+        <id>4</id>
+        <name>Đỗ Đại Học</name>
+        <age>20</age>
+        <address>Ha Noi</address>
+        <cccd>9.0</cccd>
+    </customer>
+    <customer>
+        <id>5</id>
+        <name>Nguyen Van B</name>
+        <age>22</age>
+        <address>HP</address>
+        <cccd>8.0</cccd>
+    </customer>
+    <customer>
+        <id>6</id>
+        <name>Nguyễn Văn B</name>
+        <age>25</age>
+        <address>àdsdf 
+àdasdfs
+àdsadfsdf</address>
+        <cccd>7.5</cccd>
+    </customer>
+    <customer>
+        <id>7</id>
+        <name>nguyễn văn a</name>
+        <age>52</age>
+        <address>dsadfsdf</address>
+        <cccd>8.0</cccd>
+    </customer>
+</customers>
