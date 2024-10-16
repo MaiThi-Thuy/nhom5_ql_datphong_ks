@@ -75,10 +75,10 @@ public class RoomDao {
         int size = listRooms.size();
         for (int i = 0; i < size; i++) {
             if (listRooms.get(i).getId() == room.getId()) {
-                listRooms.get(i).setName(room.getName());
-                listRooms.get(i).setAge(room.getAge());
-                listRooms.get(i).setAddress(room.getAddress());
-                listRooms.get(i).setCccd(room.getCccd());
+//                listRooms.get(i).setName(room.getName());
+//                listRooms.get(i).setAge(room.getAge());
+//                listRooms.get(i).setAddress(room.getAddress());
+//                listRooms.get(i).setCccd(room.getCccd());
                 writeListRooms(listRooms);
                 break;
             }
@@ -114,7 +114,8 @@ public class RoomDao {
     public void sortRoomByName() {
         Collections.sort(listRooms, new Comparator<Room>() {
             public int compare(Room room1, Room room2) {
-                return room1.getName().compareTo(room2.getName());
+//                return room1.getName().compareTo(room2.getName());
+                    return 1;
             }
         });
     }

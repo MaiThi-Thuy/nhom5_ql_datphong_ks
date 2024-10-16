@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Room;
+import vn.viettuts.qlks.view.CustomerView;
 import vn.viettuts.qlks.view.RoomView;
 
 public class RoomController {
@@ -26,6 +27,7 @@ public class RoomController {
         //view.addSortRoomCCCDListener(new SortRoomCCCDListener());
         view.addSortRoomNameListener(new SortRoomNameListener());
         view.addListRoomSelectionListener(new ListRoomSelectionListener());
+        view.addNavigateToCustomerViewListener( new NavigateCustomerListener());
     }
 
     public void showRoomView() {
@@ -135,6 +137,15 @@ public class RoomController {
     class ListRoomSelectionListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             roomView.fillRoomFromSelectedRow();
+        }
+    }
+    class NavigateCustomerListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CustomerView customerView = new CustomerView();
+                CustomerController customerController = new CustomerController(customerView);
+                customerController.showCustomerView();
+            roomView.setVisible(false);
         }
     }
 }

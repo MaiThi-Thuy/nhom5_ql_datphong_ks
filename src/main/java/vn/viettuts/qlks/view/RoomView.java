@@ -30,6 +30,7 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
     private JButton clearBtn;
     private JButton sortRoomCCCDBtn;
     private JButton sortRoomNameBtn;
+    private JButton navigateToCustomerViewBtn; // New button
     private JScrollPane jScrollPaneRoomTable;
     private JScrollPane jScrollPaneAddress;
     private JTable roomTable;
@@ -67,6 +68,7 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         clearBtn = new JButton("Clear");
         sortRoomCCCDBtn = new JButton("Sort By CCCD");
         sortRoomNameBtn = new JButton("Sort By Name");
+        navigateToCustomerViewBtn = new JButton("Go to Customer View"); // Initialize new button
         // khởi tạo bảng room
         jScrollPaneRoomTable = new JScrollPane();
         roomTable = new JTable();
@@ -111,6 +113,7 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         panel.add(clearBtn);
         panel.add(sortRoomCCCDBtn);
         panel.add(sortRoomNameBtn);
+        panel.add(navigateToCustomerViewBtn); // Add new button to panel
         
         panel.add(idLabel);
         panel.add(nameLabel);
@@ -171,6 +174,9 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         layout.putConstraint(SpringLayout.WEST, sortRoomNameBtn, 115, SpringLayout.WEST, sortRoomCCCDBtn);
         layout.putConstraint(SpringLayout.NORTH, sortRoomNameBtn, 330, SpringLayout.NORTH, panel);
         
+        layout.putConstraint(SpringLayout.WEST, navigateToCustomerViewBtn, 20, SpringLayout.WEST, panel); // Set layout for new button
+        layout.putConstraint(SpringLayout.NORTH, navigateToCustomerViewBtn, 310, SpringLayout.NORTH, panel); // Set layout for new button
+        
         this.add(panel);
         this.pack();
         this.setTitle("Room Information");
@@ -186,6 +192,7 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         JOptionPane.showMessageDialog(this, message);
     }
     
+    // ... (rest of the code remains unchanged)
     /**
      * hiển thị list room vào bảng roomTable
      * 
@@ -200,10 +207,10 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         Object [][] rooms = new Object[size][6];
         for (int i = 0; i < size; i++) {
             rooms[i][0] = list.get(i).getId();
-            rooms[i][1] = list.get(i).getName();
-            rooms[i][2] = list.get(i).getAge();
-            rooms[i][3] = list.get(i).getAddress();
-            rooms[i][4] = list.get(i).getCccd();
+//            rooms[i][1] = list.get(i).getName();
+//            rooms[i][2] = list.get(i).getAge();
+//            rooms[i][3] = list.get(i).getAddress();
+//            rooms[i][4] = list.get(i).getCccd();
             //rooms[i][5] = list.get(i).getSdt();
         }
         roomTable.setModel(new DefaultTableModel(rooms, columnNames));
@@ -255,10 +262,10 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
      */
     public void showRoom(Room room) {
         idField.setText("" + room.getId());
-        nameField.setText(room.getName());
-        ageField.setText("" + room.getAge());
-        addressTA.setText(room.getAddress());
-        cccdField.setText("" + room.getCccd());
+//        nameField.setText(room.getName());
+//        ageField.setText("" + room.getAge());
+//        addressTA.setText(room.getAddress());
+//        cccdField.setText("" + room.getCccd());
         //sdtField.setText(room.getSdt());
         // enable Edit and Delete buttons
         editRoomBtn.setEnabled(true);
@@ -282,10 +289,10 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
             if (idField.getText() != null && !"".equals(idField.getText())) {
                 room.setId(Integer.parseInt(idField.getText()));
             }
-            room.setName(nameField.getText().trim());
-            room.setAge(Byte.parseByte(ageField.getText().trim()));
-            room.setAddress(addressTA.getText().trim());
-            room.setCccd(cccdField.getText().trim());
+//            room.setName(nameField.getText().trim());
+//            room.setAge(Byte.parseByte(ageField.getText().trim()));
+//            room.setAddress(addressTA.getText().trim());
+//            room.setCccd(cccdField.getText().trim());
             //room.setSdt(sdtField.getText().trim());
             return room;
         } catch (Exception e) {
@@ -388,5 +395,8 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
     
     public void addListRoomSelectionListener(ListSelectionListener listener) {
         roomTable.getSelectionModel().addListSelectionListener(listener);
+    }
+    public void addNavigateToCustomerViewListener(ActionListener listener) {
+        navigateToCustomerViewBtn.addActionListener(listener);
     }
 }
