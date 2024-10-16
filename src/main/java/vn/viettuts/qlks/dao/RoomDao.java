@@ -15,7 +15,7 @@ import vn.viettuts.qlks.utils.FileUtils;
  * @author viettuts.vn
  */
 public class RoomDao {
-    private final static String STUDENT_FILE_NAME = "room.json";
+    private final static String ROOM_FILE = "room.json";
     private List<Room> listRooms;
 
     public RoomDao() {
@@ -33,7 +33,7 @@ public class RoomDao {
     public void writeListRooms(List<Room> rooms) {
         RoomJSON roomXML = new RoomJSON();
         roomXML.setRoom(rooms);
-        FileUtils.writeJSONtoFile(STUDENT_FILE_NAME, roomXML); // updated to JSON
+        FileUtils.writeJSONtoFile(ROOM_FILE, roomXML); // updated to JSON
     }
 
     /**
@@ -43,7 +43,7 @@ public class RoomDao {
      */
     public List<Room> readListRooms() {
         List<Room> list = new ArrayList<Room>();
-        RoomJSON roomXML = FileUtils.readJSONFile(STUDENT_FILE_NAME, RoomJSON.class); // updated to JSON
+        RoomJSON roomXML = FileUtils.readJSONFile(ROOM_FILE, RoomJSON.class); // updated to JSON
         if (roomXML != null) {
             list = roomXML.getRoom();
         }
@@ -75,10 +75,9 @@ public class RoomDao {
         int size = listRooms.size();
         for (int i = 0; i < size; i++) {
             if (listRooms.get(i).getId() == room.getId()) {
-//                listRooms.get(i).setName(room.getName());
-//                listRooms.get(i).setAge(room.getAge());
-//                listRooms.get(i).setAddress(room.getAddress());
-//                listRooms.get(i).setCccd(room.getCccd());
+                listRooms.get(i).setPrice(room.getPrice());
+                listRooms.get(i).setType(room.getType());
+                listRooms.get(i).setStatus(room.isStatus());
                 writeListRooms(listRooms);
                 break;
             }

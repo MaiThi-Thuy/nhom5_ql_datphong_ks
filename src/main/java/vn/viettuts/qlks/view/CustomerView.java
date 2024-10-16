@@ -68,7 +68,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         clearBtn = new JButton("Clear");
         sortCustomerCCCDBtn = new JButton("Sort By CCCD");
         sortCustomerNameBtn = new JButton("Sort By Name");
-        navigateToRoomViewBtn = new JButton("Navigate to RoomView"); // Initialize new button
+        navigateToRoomViewBtn = new JButton("Rooms"); // Initialize new button
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
         customerTable = new JTable();

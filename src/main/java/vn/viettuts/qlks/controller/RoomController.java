@@ -32,6 +32,7 @@ public class RoomController {
 
     public void showRoomView() {
         List<Room> roomList = roomDao.getListRooms();
+        //roomView.showSelectRooms()
         roomView.setVisible(true);
         roomView.showListRooms(roomList);
     }

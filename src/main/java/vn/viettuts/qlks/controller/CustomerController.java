@@ -131,6 +131,7 @@ public class CustomerController {
             RoomView roomView = new RoomView();
             RoomController roomController = new RoomController(roomView);
             roomController.showRoomView();
+            //roomController.showSelectionRoomView();
             customerView.setVisible(false);
         }
     }

@@ -15,7 +15,7 @@ import vn.viettuts.qlks.utils.FileUtils;
  * @author viettuts.vn
  */
 public class CustomerDao {
-    private final static String STUDENT_FILE_NAME = "customer.json";
+    private final static String CUSTOMER_FILE = "customer.json";
     private List<Customer> listCustomers;
 
     public CustomerDao() {
@@ -33,7 +33,7 @@ public class CustomerDao {
     public void writeListCustomers(List<Customer> customers) {
         CustomerJSON customerXML = new CustomerJSON();
         customerXML.setCustomer(customers);
-        FileUtils.writeJSONtoFile(STUDENT_FILE_NAME, customerXML); // updated to JSON
+        FileUtils.writeJSONtoFile(CUSTOMER_FILE, customerXML); // updated to JSON
     }
 
     /**
@@ -43,7 +43,7 @@ public class CustomerDao {
      */
     public List<Customer> readListCustomers() {
         List<Customer> list = new ArrayList<Customer>();
-        CustomerJSON customerXML = FileUtils.readJSONFile(STUDENT_FILE_NAME, CustomerJSON.class); // updated to JSON
+        CustomerJSON customerXML = FileUtils.readJSONFile(CUSTOMER_FILE, CustomerJSON.class); // updated to JSON
         if (customerXML != null) {
             list = customerXML.getCustomer();
         }
