@@ -3,9 +3,11 @@ package vn.viettuts.qlks.view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,13 +43,16 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JLabel addressLabel;
     private JLabel cccdLabel;
     private JLabel sdtLabel;
-    
+    private JLabel roomTypesLabel;
+
     private JTextField idField;
     private JTextField nameField;
     private JTextField ageField;
     private JTextArea addressTA;
     private JTextField cccdField;
     private JTextField sdtField;
+    
+    private JComboBox<String> l_RoomTypes;
     
     // định nghĩa các cột của bảng customer
     private String [] columnNames = new String [] {
@@ -72,7 +77,6 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
         customerTable = new JTable();
-        
         // khởi tạo các label
         idLabel = new JLabel("Id");
         nameLabel = new JLabel("Ten");
@@ -80,6 +84,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addressLabel = new JLabel("DiaChi");
         cccdLabel = new JLabel("CCCD");
         sdtLabel = new JLabel("SDT");
+        roomTypesLabel = new JLabel("Room Type");
         
         // khởi tạo các trường nhập dữ liệu cho customer
         idField = new JTextField(6);
@@ -88,16 +93,24 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         ageField = new JTextField(6);
         addressTA = new JTextArea();
         addressTA.setColumns(15);
-        addressTA.setRows(5);
+        addressTA.setRows(2);
         jScrollPaneAddress = new JScrollPane();
         jScrollPaneAddress.setViewportView(addressTA);
         cccdField = new JTextField(15);
         sdtField = new JTextField(15);
         
+        // roomtypes show test
+        l_RoomTypes = new JComboBox<String>();
+        l_RoomTypes.addItem("VIP");
+        l_RoomTypes.addItem("Normal");
+        
+
+
         // cài đặt các cột và data cho bảng customer
         customerTable.setModel(new DefaultTableModel((Object[][]) data, columnNames));
         jScrollPaneCustomerTable.setViewportView(customerTable);
         jScrollPaneCustomerTable.setPreferredSize(new Dimension (480, 300));
+        
         
          // tạo spring layout
         SpringLayout layout = new SpringLayout();
@@ -114,7 +127,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(sortCustomerCCCDBtn);
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
+        panel.add(roomTypesLabel);
         
+
         panel.add(idLabel);
         panel.add(nameLabel);
         panel.add(ageLabel);
@@ -128,8 +143,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(jScrollPaneAddress);
         panel.add(cccdField);
         panel.add(sdtField);
-        
-        // cài đặt vị trí các thành phần trên màn hình login
+        panel.add(l_RoomTypes);// add roomtypes to panel
+        //label
         layout.putConstraint(SpringLayout.WEST, idLabel, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, idLabel, 10, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, nameLabel, 10, SpringLayout.WEST, panel);
@@ -139,10 +154,15 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.WEST, addressLabel, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, addressLabel, 100, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, cccdLabel, 10, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, cccdLabel, 200, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, cccdLabel, 140, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sdtLabel, 10, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, sdtLabel, 230, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, sdtLabel, 170, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, roomTypesLabel, 10, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, roomTypesLabel, 200, SpringLayout.NORTH, panel);
         
+        
+        
+        //Fiels
         layout.putConstraint(SpringLayout.WEST, idField, 100, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, idField, 10, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, nameField, 100, SpringLayout.WEST, panel);
@@ -152,10 +172,14 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.WEST, jScrollPaneAddress, 100, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, jScrollPaneAddress, 100, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, cccdField, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, cccdField, 200, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, cccdField, 140, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sdtField, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, sdtField, 230, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, sdtField, 170, SpringLayout.NORTH, panel);
         
+
+        layout.putConstraint(SpringLayout.WEST, l_RoomTypes, 100, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, l_RoomTypes, 200, SpringLayout.NORTH, panel);
+
         layout.putConstraint(SpringLayout.WEST, jScrollPaneCustomerTable, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, jScrollPaneCustomerTable, 10, SpringLayout.NORTH, panel);
         
@@ -191,7 +215,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
-    
+    // public void showTypesRoom(ArrayList<String> types){
+    //     l_RoomTypes =new
+    // }
     /**
      * hiển thị list customer vào bảng customerTable
      * 

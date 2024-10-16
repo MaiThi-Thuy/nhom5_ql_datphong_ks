@@ -7,10 +7,13 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import vn.viettuts.qlks.dao.CustomerDao;
+import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Customer;
+import vn.viettuts.qlks.entity.Room;
 import vn.viettuts.qlks.view.CustomerView;
 import vn.viettuts.qlks.view.RoomView;
 public class CustomerController {
+    private RoomDao roomDao;
     private CustomerDao customerDao;
     private CustomerView customerView;
 
@@ -30,6 +33,7 @@ public class CustomerController {
 
     public void showCustomerView() {
         List<Customer> customerList = customerDao.getListCustomers();
+        //List<Room> roomList=roomDao.getListRooms();
         customerView.setVisible(true);
         customerView.showListCustomers(customerList);
     }
