@@ -80,6 +80,8 @@ public class CustomerDao {
                 listCustomers.get(i).setAddress(customer.getAddress());
                 listCustomers.get(i).setCccd(customer.getCccd());
                 listCustomers.get(i).setSdt(customer.getSdt());
+                listCustomers.get(i).setCheckIn(customer.getCheckIn());
+                listCustomers.get(i).setCheckOut(customer.getCheckOut());
                 writeListCustomers(listCustomers);
                 break;
             }

@@ -6,6 +6,14 @@ import java.util.List;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import vn.viettuts.qlks.controller.CustomerController.AddCustomerListener;
+import vn.viettuts.qlks.controller.CustomerController.ClearCustomerListener;
+import vn.viettuts.qlks.controller.CustomerController.DeleteCustomerListener;
+import vn.viettuts.qlks.controller.CustomerController.EditCustomerListener;
+import vn.viettuts.qlks.controller.CustomerController.ListCustomerSelectionListener;
+import vn.viettuts.qlks.controller.CustomerController.NavigateRoomListener;
+import vn.viettuts.qlks.controller.CustomerController.SortCustomerNameListener;
 import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Customer;
@@ -13,14 +21,14 @@ import vn.viettuts.qlks.entity.Room;
 import vn.viettuts.qlks.view.CustomerView;
 import vn.viettuts.qlks.view.RoomView;
 public class CustomerController {
-    private RoomDao roomDao;
+    //
     private CustomerDao customerDao;
     private CustomerView customerView;
-
+    private RoomDao roomDao;
     public CustomerController(CustomerView view) {
         this.customerView = view;
         customerDao = new CustomerDao();
-
+        roomDao= new RoomDao();
         view.addAddCustomerListener(new AddCustomerListener());
         view.addEdiCustomerListener(new EditCustomerListener());
         view.addDeleteCustomerListener(new DeleteCustomerListener());
@@ -33,9 +41,9 @@ public class CustomerController {
 
     public void showCustomerView() {
         List<Customer> customerList = customerDao.getListCustomers();
-        //List<Room> roomList=roomDao.getListRooms();
         customerView.setVisible(true);
         customerView.showListCustomers(customerList);
+        customerView.addTypesRoom(roomDao.getQLRoom().showTypes());
     }
 
     /**
@@ -130,7 +138,6 @@ public class CustomerController {
         }
     }
     class NavigateRoomListener implements ActionListener {
-        @Override
         public void actionPerformed(ActionEvent e) {
             RoomView roomView = new RoomView();
             RoomController roomController = new RoomController(roomView);
@@ -139,6 +146,7 @@ public class CustomerController {
             customerView.setVisible(false);
         }
     }
+    
     /**
      * Lớp ListCustomerSelectionListener 
      * chứa cài đặt cho sự kiện chọn customer trong bảng customer

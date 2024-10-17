@@ -11,11 +11,12 @@ import java.util.*;
  * @author hieu7
  */
 public class QLRoom {
-    private TreeMap<String,ArrayList<Room>> qlLoai;
-    public QLRoom(){
+    private TreeMap<String,List<Room>> qlLoai;
+    public QLRoom(List<Room> rooms){
         this.qlLoai=new TreeMap<>();
+        addRooms(rooms);
     }
-    public void addRooms(ArrayList<Room> rooms){
+    public void addRooms(List<Room> rooms){
         for (Room room : rooms) {
             ArrayList<Room> ls=new ArrayList<>();
             if(this.qlLoai.get(room.getType())==null){
@@ -26,6 +27,23 @@ public class QLRoom {
                 this.qlLoai.get(room.getType()).add(room);
             }
         }
+    }
+    public void deleteRoom(int id){
+        for(Map.Entry<String,List<Room>> entry:this.qlLoai.entrySet()){
+            for(Room r:entry.getValue()){
+                if(r.getId()==id){
+                    r.setStatus(false);
+                    return;
+                }
+            }
+        }
+    }
+    public ArrayList<String>showTypes(){
+        ArrayList<String> arr=new ArrayList<>();
+        for(Map.Entry<String,List<Room>> entry:this.qlLoai.entrySet()){
+            arr.add(entry.getKey());
+        }
+        return arr;
     }
     public ArrayList<Room> searchRooms(String loai){
         ArrayList<Room> arr= new ArrayList<>();

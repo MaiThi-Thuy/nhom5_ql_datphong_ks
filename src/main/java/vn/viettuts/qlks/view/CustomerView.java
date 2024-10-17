@@ -43,7 +43,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JLabel addressLabel;
     private JLabel cccdLabel;
     private JLabel sdtLabel;
-    private JLabel roomTypesLabel;
+    private JLabel roomTypesLabel; //romm type label
+    private JLabel lRoomLabel; //room label
     private JLabel checkInLabel; // New label
     private JLabel checkOutLabel; // New label
 
@@ -57,6 +58,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JTextField checkOutField; // New field
     
     private JComboBox<String> l_RoomTypes;
+    private JComboBox<String> l_Rooms;
     
     // định nghĩa các cột của bảng customer
     private String [] columnNames = new String [] {
@@ -67,7 +69,12 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     public CustomerView() {
         initComponents();
     }
-
+    public void addTypesRoom(List<String> types){
+        for(int i=0;i<types.size();i++){
+            this.l_RoomTypes.addItem(types.get(i));
+        }
+            
+    }
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // khởi tạo các phím chức năng
@@ -89,6 +96,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         cccdLabel = new JLabel("CCCD");
         sdtLabel = new JLabel("SDT");
         roomTypesLabel = new JLabel("Room Type");
+        lRoomLabel = new JLabel("Rooms");
         checkInLabel = new JLabel("CheckIn"); // Initialize new label
         checkOutLabel = new JLabel("CheckOut"); // Initialize new label
         
@@ -109,8 +117,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         
         // roomtypes show test
         l_RoomTypes = new JComboBox<String>();
-        l_RoomTypes.addItem("VIP");
-        l_RoomTypes.addItem("Normal");
+//        l_RoomTypes.addItem("VIP");
+//        l_RoomTypes.addItem("Normal");
+        
         
         // cài đặt các cột và data cho bảng customer
         customerTable.setModel(new DefaultTableModel((Object[][]) data, columnNames));
@@ -196,22 +205,22 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, jScrollPaneCustomerTable, 10, SpringLayout.NORTH, panel);
         
         layout.putConstraint(SpringLayout.WEST, addCustomerBtn, 20, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, addCustomerBtn, 300, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, addCustomerBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, editCustomerBtn, 60, SpringLayout.WEST, addCustomerBtn);
-        layout.putConstraint(SpringLayout.NORTH, editCustomerBtn, 300, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, editCustomerBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, deleteCustomerBtn, 60, SpringLayout.WEST, editCustomerBtn);
         
-        layout.putConstraint(SpringLayout.NORTH, clearBtn, 300, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, clearBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, clearBtn, 80, SpringLayout.WEST, deleteCustomerBtn);
         
-        layout.putConstraint(SpringLayout.NORTH, deleteCustomerBtn, 300, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, deleteCustomerBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortCustomerCCCDBtn, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, sortCustomerCCCDBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortCustomerNameBtn, 115, SpringLayout.WEST, sortCustomerCCCDBtn);
         layout.putConstraint(SpringLayout.NORTH, sortCustomerNameBtn, 360, SpringLayout.NORTH, panel);
         
-        layout.putConstraint(SpringLayout.WEST, navigateToRoomViewBtn, 20, SpringLayout.WEST, panel); // Position new button
-        layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 330, SpringLayout.NORTH, panel); // Position new button
+        layout.putConstraint(SpringLayout.WEST, navigateToRoomViewBtn, 115, SpringLayout.WEST, sortCustomerNameBtn); // Position new button
+        layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 360, SpringLayout.NORTH, panel); // Position new button
         
         this.add(panel);
         this.pack();

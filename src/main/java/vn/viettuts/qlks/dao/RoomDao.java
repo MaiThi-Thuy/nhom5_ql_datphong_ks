@@ -8,6 +8,7 @@ import java.util.List;
 import vn.viettuts.qlks.entity.Room;
 import vn.viettuts.qlks.entity.RoomJSON;
 import vn.viettuts.qlks.utils.FileUtils;
+import vn.viettuts.qlks.dao.QLRoom;
 
 /**
  * RoomDao class
@@ -17,12 +18,13 @@ import vn.viettuts.qlks.utils.FileUtils;
 public class RoomDao {
     private final static String ROOM_FILE = "room.json";
     private List<Room> listRooms;
-
+    private QLRoom qlRoom;
     public RoomDao() {
         this.listRooms = readListRooms();
         if (listRooms == null) {
             listRooms = new ArrayList<Room>();
         }
+        this.qlRoom=new QLRoom(this.listRooms);
     }
 
     /**
@@ -64,8 +66,8 @@ public class RoomDao {
         room.setId(id);
         listRooms.add(room);
         writeListRooms(listRooms);
-    }
 
+    } 
     /**
      * cập nhật room vào listRooms và lưu listRooms vào file
      * 
@@ -83,7 +85,9 @@ public class RoomDao {
             }
         }
     }
-
+    public QLRoom getQLRoom(){
+        return this.qlRoom;
+    }
     /**
      * xóa room từ listRooms và lưu listRooms vào file
      * 
