@@ -15,6 +15,7 @@ vn\viettuts\qlks\controller\LoginController$LoginListener.class
 vn\viettuts\qlks\controller\RoomController.class
 vn\viettuts\qlks\dao\RoomDao.class
 vn\viettuts\qlks\controller\CustomerController$EditCustomerListener.class
+vn\viettuts\qlks\controller\CustomerController$RoomTypesListener.class
 vn\viettuts\qlks\entity\User.class
 vn\viettuts\qlks\App.class
 vn\viettuts\qlks\dao\RoomDao$1.class

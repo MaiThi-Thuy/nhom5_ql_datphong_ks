@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,7 +22,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-
+import vn.viettuts.qlks.entity.Room;
 import vn.viettuts.qlks.entity.Customer;
 
 public class CustomerView extends JFrame implements ActionListener, ListSelectionListener {
@@ -69,12 +70,24 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     public CustomerView() {
         initComponents();
     }
+    //Them loai phong vao combobox
     public void addTypesRoom(List<String> types){
         for(int i=0;i<types.size();i++){
             this.l_RoomTypes.addItem(types.get(i));
         }
             
     }
+    public void addRooms(ArrayList<String> rooms){
+        this.l_Rooms.removeAllItems();
+        for(int i=0;i<rooms.size();i++){
+            this.l_Rooms.addItem(rooms.get(i));
+        }
+
+    }
+    public String getRoomType(){
+        return (String) l_RoomTypes.getSelectedItem();
+    }
+
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // khởi tạo các phím chức năng
@@ -85,6 +98,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         sortCustomerCCCDBtn = new JButton("Sort By CCCD");
         sortCustomerNameBtn = new JButton("Sort By Name");
         navigateToRoomViewBtn = new JButton("Rooms"); // Initialize new button
+        
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
         customerTable = new JTable();
@@ -96,7 +110,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         cccdLabel = new JLabel("CCCD");
         sdtLabel = new JLabel("SDT");
         roomTypesLabel = new JLabel("Room Type");
-        lRoomLabel = new JLabel("Rooms");
+        lRoomLabel = new JLabel("Rooms"); // Initialize rooms label
         checkInLabel = new JLabel("CheckIn"); // Initialize new label
         checkOutLabel = new JLabel("CheckOut"); // Initialize new label
         
@@ -117,6 +131,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         
         // roomtypes show test
         l_RoomTypes = new JComboBox<String>();
+        l_Rooms = new JComboBox<String>();
 //        l_RoomTypes.addItem("VIP");
 //        l_RoomTypes.addItem("Normal");
         
@@ -142,8 +157,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
         panel.add(roomTypesLabel);
+        panel.add(lRoomLabel); // Add new label to panel
         panel.add(checkInLabel); // Add new label to panel
         panel.add(checkOutLabel); // Add new label to panel
+
 
         panel.add(idLabel);
         panel.add(nameLabel);
@@ -161,6 +178,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(checkInField); // Add new field to panel
         panel.add(checkOutField); // Add new field to panel
         panel.add(l_RoomTypes);// add roomtypes to panel
+        panel.add(l_Rooms);// add rooms to panel
         //label
         layout.putConstraint(SpringLayout.WEST, idLabel, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, idLabel, 10, SpringLayout.NORTH, panel);
@@ -180,6 +198,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, checkInLabel, 230, SpringLayout.NORTH, panel); // Position new label
         layout.putConstraint(SpringLayout.WEST, checkOutLabel, 10, SpringLayout.WEST, panel); // Position new label
         layout.putConstraint(SpringLayout.NORTH, checkOutLabel, 260, SpringLayout.NORTH, panel); // Position new label
+        layout.putConstraint(SpringLayout.WEST, lRoomLabel, 10, SpringLayout.WEST, panel); // Position new label
+        layout.putConstraint(SpringLayout.NORTH, lRoomLabel, 290, SpringLayout.NORTH, panel); // Position new label
+        
         
         //Fiels
         layout.putConstraint(SpringLayout.WEST, idField, 100, SpringLayout.WEST, panel);
@@ -200,6 +221,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, checkInField, 230, SpringLayout.NORTH, panel); // Position new field
         layout.putConstraint(SpringLayout.WEST, checkOutField, 100, SpringLayout.WEST, panel); // Position new field
         layout.putConstraint(SpringLayout.NORTH, checkOutField, 260, SpringLayout.NORTH, panel); // Position new field
+        layout.putConstraint(SpringLayout.WEST, l_Rooms, 100, SpringLayout.WEST, panel); // Position new field
+        layout.putConstraint(SpringLayout.NORTH, l_Rooms, 290, SpringLayout.NORTH, panel); // Position new field
+
 
         layout.putConstraint(SpringLayout.WEST, jScrollPaneCustomerTable, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, jScrollPaneCustomerTable, 10, SpringLayout.NORTH, panel);
@@ -451,6 +475,11 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     
     public void addListCustomerSelectionListener(ListSelectionListener listener) {
         customerTable.getSelectionModel().addListSelectionListener(listener);
+    }
+    
+    //room types listener
+    public void addRoomtypesListener(ActionListener listener){
+        l_RoomTypes.addActionListener(listener);
     }
 
     public void addNavigateToRoomViewListener(ActionListener listener) {

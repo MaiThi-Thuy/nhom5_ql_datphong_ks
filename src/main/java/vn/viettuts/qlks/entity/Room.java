@@ -53,7 +53,7 @@ public class Room implements Serializable {
 
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", type=" + type + ", price=" + price + ", status=" + status + '}';
+        return "Room: "+id;
     }
     
 

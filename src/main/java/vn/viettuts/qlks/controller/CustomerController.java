@@ -13,6 +13,7 @@ import vn.viettuts.qlks.controller.CustomerController.DeleteCustomerListener;
 import vn.viettuts.qlks.controller.CustomerController.EditCustomerListener;
 import vn.viettuts.qlks.controller.CustomerController.ListCustomerSelectionListener;
 import vn.viettuts.qlks.controller.CustomerController.NavigateRoomListener;
+import vn.viettuts.qlks.controller.CustomerController.RoomTypesListener;
 import vn.viettuts.qlks.controller.CustomerController.SortCustomerNameListener;
 import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.dao.RoomDao;
@@ -37,6 +38,8 @@ public class CustomerController {
         view.addSortCustomerNameListener(new SortCustomerNameListener());
         view.addListCustomerSelectionListener(new ListCustomerSelectionListener());
         view.addNavigateToRoomViewListener( new NavigateRoomListener());
+
+        view.addRoomtypesListener(new RoomTypesListener());
     }
 
     public void showCustomerView() {
@@ -144,6 +147,14 @@ public class CustomerController {
             roomController.showRoomView();
             //roomController.showSelectionRoomView();
             customerView.setVisible(false);
+        }
+    }
+
+    //RoomTypes listener
+    class RoomTypesListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //customerView.showMessage("RoomTypes");
+            customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
         }
     }
     

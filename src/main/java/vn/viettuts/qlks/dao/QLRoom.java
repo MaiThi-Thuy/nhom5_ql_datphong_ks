@@ -45,10 +45,10 @@ public class QLRoom {
         }
         return arr;
     }
-    public ArrayList<Room> searchRooms(String loai){
-        ArrayList<Room> arr= new ArrayList<>();
+    public ArrayList<String> searchRooms(String loai){
+        ArrayList<String> arr= new ArrayList<>();
         for(Room r:this.qlLoai.get(loai)){
-            if(r.isStatus())arr.add(r);
+            if(r.isStatus())arr.add(r.toString());
         }
         return arr;
     }

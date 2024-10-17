@@ -10,7 +10,13 @@
       "id": 2,
       "type": "Normal",
       "price": 5000.0,
-      "status": false
+      "status": true
+    },
+    {
+      "id": 3,
+      "type": "SuperVip",
+      "price": 20000.0,
+      "status": true
     }
   ]
 }
