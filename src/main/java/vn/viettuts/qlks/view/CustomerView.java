@@ -44,6 +44,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JLabel cccdLabel;
     private JLabel sdtLabel;
     private JLabel roomTypesLabel;
+    private JLabel checkInLabel; // New label
+    private JLabel checkOutLabel; // New label
 
     private JTextField idField;
     private JTextField nameField;
@@ -51,12 +53,14 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JTextArea addressTA;
     private JTextField cccdField;
     private JTextField sdtField;
+    private JTextField checkInField; // New field
+    private JTextField checkOutField; // New field
     
     private JComboBox<String> l_RoomTypes;
     
     // định nghĩa các cột của bảng customer
     private String [] columnNames = new String [] {
-            "ID", "Ten", "Tuoi", "DiaChi", "CCCD", "SDT"};
+            "ID", "Ten", "Tuoi", "DiaChi", "CCCD", "SDT", "CheckIn", "CheckOut"}; // Updated columns
     // định nghĩa dữ liệu mặc định của bẳng customer là rỗng
     private Object data = new Object [][] {};
     
@@ -85,6 +89,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         cccdLabel = new JLabel("CCCD");
         sdtLabel = new JLabel("SDT");
         roomTypesLabel = new JLabel("Room Type");
+        checkInLabel = new JLabel("CheckIn"); // Initialize new label
+        checkOutLabel = new JLabel("CheckOut"); // Initialize new label
         
         // khởi tạo các trường nhập dữ liệu cho customer
         idField = new JTextField(6);
@@ -98,25 +104,24 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         jScrollPaneAddress.setViewportView(addressTA);
         cccdField = new JTextField(15);
         sdtField = new JTextField(15);
+        checkInField = new JTextField(15); // Initialize new field
+        checkOutField = new JTextField(15); // Initialize new field
         
         // roomtypes show test
         l_RoomTypes = new JComboBox<String>();
         l_RoomTypes.addItem("VIP");
         l_RoomTypes.addItem("Normal");
         
-
-
         // cài đặt các cột và data cho bảng customer
         customerTable.setModel(new DefaultTableModel((Object[][]) data, columnNames));
         jScrollPaneCustomerTable.setViewportView(customerTable);
-        jScrollPaneCustomerTable.setPreferredSize(new Dimension (480, 300));
-        
+        jScrollPaneCustomerTable.setPreferredSize(new Dimension (800, 340));
         
          // tạo spring layout
         SpringLayout layout = new SpringLayout();
         // tạo đối tượng panel để chứa các thành phần của màn hình quản lý Customer
         JPanel panel = new JPanel();
-        panel.setSize(800, 420);
+        panel.setSize(900, 500);    
         panel.setLayout(layout);
         panel.add(jScrollPaneCustomerTable);
         
@@ -128,7 +133,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
         panel.add(roomTypesLabel);
-        
+        panel.add(checkInLabel); // Add new label to panel
+        panel.add(checkOutLabel); // Add new label to panel
 
         panel.add(idLabel);
         panel.add(nameLabel);
@@ -143,6 +149,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(jScrollPaneAddress);
         panel.add(cccdField);
         panel.add(sdtField);
+        panel.add(checkInField); // Add new field to panel
+        panel.add(checkOutField); // Add new field to panel
         panel.add(l_RoomTypes);// add roomtypes to panel
         //label
         layout.putConstraint(SpringLayout.WEST, idLabel, 10, SpringLayout.WEST, panel);
@@ -159,8 +167,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, sdtLabel, 170, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, roomTypesLabel, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, roomTypesLabel, 200, SpringLayout.NORTH, panel);
-        
-        
+        layout.putConstraint(SpringLayout.WEST, checkInLabel, 10, SpringLayout.WEST, panel); // Position new label
+        layout.putConstraint(SpringLayout.NORTH, checkInLabel, 230, SpringLayout.NORTH, panel); // Position new label
+        layout.putConstraint(SpringLayout.WEST, checkOutLabel, 10, SpringLayout.WEST, panel); // Position new label
+        layout.putConstraint(SpringLayout.NORTH, checkOutLabel, 260, SpringLayout.NORTH, panel); // Position new label
         
         //Fiels
         layout.putConstraint(SpringLayout.WEST, idField, 100, SpringLayout.WEST, panel);
@@ -175,36 +185,38 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, cccdField, 140, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sdtField, 100, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, sdtField, 170, SpringLayout.NORTH, panel);
-        
-
         layout.putConstraint(SpringLayout.WEST, l_RoomTypes, 100, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, l_RoomTypes, 200, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, checkInField, 100, SpringLayout.WEST, panel); // Position new field
+        layout.putConstraint(SpringLayout.NORTH, checkInField, 230, SpringLayout.NORTH, panel); // Position new field
+        layout.putConstraint(SpringLayout.WEST, checkOutField, 100, SpringLayout.WEST, panel); // Position new field
+        layout.putConstraint(SpringLayout.NORTH, checkOutField, 260, SpringLayout.NORTH, panel); // Position new field
 
         layout.putConstraint(SpringLayout.WEST, jScrollPaneCustomerTable, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, jScrollPaneCustomerTable, 10, SpringLayout.NORTH, panel);
         
         layout.putConstraint(SpringLayout.WEST, addCustomerBtn, 20, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, addCustomerBtn, 270, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, addCustomerBtn, 300, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, editCustomerBtn, 60, SpringLayout.WEST, addCustomerBtn);
-        layout.putConstraint(SpringLayout.NORTH, editCustomerBtn, 270, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, editCustomerBtn, 300, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, deleteCustomerBtn, 60, SpringLayout.WEST, editCustomerBtn);
         
-        layout.putConstraint(SpringLayout.NORTH, clearBtn, 270, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, clearBtn, 300, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, clearBtn, 80, SpringLayout.WEST, deleteCustomerBtn);
         
-        layout.putConstraint(SpringLayout.NORTH, deleteCustomerBtn, 270, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, deleteCustomerBtn, 300, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortCustomerCCCDBtn, 300, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, sortCustomerCCCDBtn, 330, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, sortCustomerCCCDBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortCustomerNameBtn, 115, SpringLayout.WEST, sortCustomerCCCDBtn);
-        layout.putConstraint(SpringLayout.NORTH, sortCustomerNameBtn, 330, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, sortCustomerNameBtn, 360, SpringLayout.NORTH, panel);
         
         layout.putConstraint(SpringLayout.WEST, navigateToRoomViewBtn, 20, SpringLayout.WEST, panel); // Position new button
-        layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 310, SpringLayout.NORTH, panel); // Position new button
+        layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 330, SpringLayout.NORTH, panel); // Position new button
         
         this.add(panel);
         this.pack();
         this.setTitle("Customer Information");
-        this.setSize(800, 420);
+        this.setSize(1200, 520);
         // disable Edit and Delete buttons
         editCustomerBtn.setEnabled(false);
         deleteCustomerBtn.setEnabled(false);
@@ -225,11 +237,11 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
      */
     public void showListCustomers(List<Customer> list) {
         int size = list.size();
-        // với bảng customerTable có 6 cột, 
+        // với bảng customerTable có 8 cột, 
         // khởi tạo mảng 2 chiều customers, trong đó:
         // số hàng: là kích thước của list customer 
-        // số cột: là 6
-        Object [][] customers = new Object[size][6];
+        // số cột: là 8
+        Object [][] customers = new Object[size][8];
         for (int i = 0; i < size; i++) {
             customers[i][0] = list.get(i).getId();
             customers[i][1] = list.get(i).getName();
@@ -237,6 +249,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customers[i][3] = list.get(i).getAddress();
             customers[i][4] = list.get(i).getCccd();
             customers[i][5] = list.get(i).getSdt();
+            customers[i][6] = list.get(i).getCheckIn(); // New column
+            customers[i][7] = list.get(i).getCheckOut(); // New column
         }
         customerTable.setModel(new DefaultTableModel(customers, columnNames));
     }
@@ -255,6 +269,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             addressTA.setText(customerTable.getModel().getValueAt(row, 3).toString());
             cccdField.setText(customerTable.getModel().getValueAt(row, 4).toString());
             sdtField.setText(customerTable.getModel().getValueAt(row, 5).toString());
+            checkInField.setText(customerTable.getModel().getValueAt(row, 6).toString()); // New field
+            checkOutField.setText(customerTable.getModel().getValueAt(row, 7).toString()); // New field
             // enable Edit and Delete buttons
             editCustomerBtn.setEnabled(true);
             deleteCustomerBtn.setEnabled(true);
@@ -273,6 +289,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addressTA.setText("");
         cccdField.setText("");
         sdtField.setText("");
+        checkInField.setText(""); // Clear new field
+        checkOutField.setText(""); // Clear new field
         // disable Edit and Delete buttons
         editCustomerBtn.setEnabled(false);
         deleteCustomerBtn.setEnabled(false);
@@ -292,6 +310,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addressTA.setText(customer.getAddress());
         cccdField.setText("" + customer.getCccd());
         sdtField.setText(""+customer.getSdt());
+        checkInField.setText(customer.getCheckIn()); // New field
+        checkOutField.setText(customer.getCheckOut()); // New field
         // enable Edit and Delete buttons
         editCustomerBtn.setEnabled(true);
         deleteCustomerBtn.setEnabled(true);
@@ -319,6 +339,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customer.setAddress(addressTA.getText().trim());
             customer.setCccd(cccdField.getText().trim());
             customer.setSdt(sdtField.getText().trim());
+            customer.setCheckIn(checkInField.getText().trim()); // New field
+            customer.setCheckOut(checkOutField.getText().trim()); // New field
             return customer;
         } catch (Exception e) {
             showMessage(e.getMessage());
@@ -405,7 +427,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     public void addDeleteCustomerListener(ActionListener listener) {
         deleteCustomerBtn.addActionListener(listener);
     }
-    
+
     public void addClearListener(ActionListener listener) {
         clearBtn.addActionListener(listener);
     }
