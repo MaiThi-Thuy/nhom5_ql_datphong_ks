@@ -2,7 +2,10 @@ package vn.viettuts.qlks.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.JTable;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,8 +41,10 @@ public class CustomerController {
         view.addSortCustomerNameListener(new SortCustomerNameListener());
         view.addListCustomerSelectionListener(new ListCustomerSelectionListener());
         view.addNavigateToRoomViewListener( new NavigateRoomListener());
+        view.addRoomtypesListener(new RoomTypesListener());// RoomTypes listener
+        view.addClickRoomListener(new ClickRoomListener());
 
-        view.addRoomtypesListener(new RoomTypesListener());
+
     }
 
     public void showCustomerView() {
@@ -168,5 +173,31 @@ public class CustomerController {
         public void valueChanged(ListSelectionEvent e) {
             customerView.fillCustomerFromSelectedRow();
         }
+    }
+
+
+    //ClickRoomListener
+    class ClickRoomListener implements MouseListener{
+        @Override
+        public void mouseClicked(MouseEvent e) {
+             JTable table=customerView.getCustomerTable();
+            int row=table.getSelectedRow();
+            int col=table.getSelectedColumn();
+            Customer customer=customerDao.getListCustomers().get(row);
+            if(col==8)customerView.showMessage("Customer: "+customer.getName());
+        }
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
     }
 }

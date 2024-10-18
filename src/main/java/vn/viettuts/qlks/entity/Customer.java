@@ -1,7 +1,7 @@
 package vn.viettuts.qlks.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -13,12 +13,12 @@ public class Customer implements Serializable {
     private String sdt;
     private String checkIn;
     private String checkOut;
-    private ArrayList<Integer> ID_room; // Changed to ArrayList<Integer>
+    private List<Integer> ID_room; // Changed to ArrayList<Integer>
 
     public Customer() {
     }
 
-    public Customer(int id, String name, byte age, String address, String cccd, String sdt, String checkIn, String checkOut, ArrayList<Integer> ID_room) {
+    public Customer(int id, String name, byte age, String address, String cccd, String sdt, String checkIn, String checkOut, List<Integer> ID_room) {
         super();
         this.id = id;
         this.name = name;
@@ -95,11 +95,11 @@ public class Customer implements Serializable {
         this.checkOut = checkOut;
     }
 
-    public ArrayList<Integer> getID_room() {
+    public List<Integer> getID_room() {
         return ID_room;
     }
 
-    public void setID_room(ArrayList<Integer> ID_room) {
+    public void setID_room(List<Integer> ID_room) {
         this.ID_room = ID_room;
     }
 
@@ -107,6 +107,6 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer [id=" + id + ", name=" + name + ", age=" + age +
                ", address=" + address + ", cccd=" + cccd + ", sdt=" + sdt +
-               ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", ID_room=" + ID_room + "]"; // Include ID_room in toString
+               ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", ID_room=" + ID_room + "]"; 
     }
 }

@@ -9,6 +9,16 @@
       "sdt": "0123456789",
       "checkIn": "23/01/2024",
       "checkOut": "25/01/2024"
+    },
+    {
+      "id": 2,
+      "name": "Nguyen",
+      "age": 21,
+      "address": "Hai Phong",
+      "cccd": "0123456789",
+      "sdt": "0123456789",
+      "checkIn": "22/01/2024",
+      "checkOut": "24/01/2024"
     }
   ]
 }

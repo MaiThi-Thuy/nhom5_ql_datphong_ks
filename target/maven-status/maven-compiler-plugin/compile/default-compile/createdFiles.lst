@@ -23,6 +23,7 @@ vn\viettuts\qlks\controller\RoomController$EditRoomListener.class
 vn\viettuts\qlks\entity\RoomJSON.class
 vn\viettuts\qlks\controller\CustomerController$ListCustomerSelectionListener.class
 vn\viettuts\qlks\controller\LoginController.class
+vn\viettuts\qlks\controller\CustomerController$ClickRoomListener.class
 vn\viettuts\qlks\controller\RoomController$AddRoomListener.class
 vn\viettuts\qlks\controller\RoomController$ListRoomSelectionListener.class
 vn\viettuts\qlks\controller\RoomController$DeleteRoomListener.class

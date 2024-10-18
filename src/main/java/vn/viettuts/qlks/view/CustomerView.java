@@ -1,8 +1,11 @@
 package vn.viettuts.qlks.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Desktop.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,9 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+
 import vn.viettuts.qlks.entity.Room;
 import vn.viettuts.qlks.entity.Customer;
 
@@ -63,7 +69,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     
     // định nghĩa các cột của bảng customer
     private String [] columnNames = new String [] {
-            "ID", "Ten", "Tuoi", "DiaChi", "CCCD", "SDT", "CheckIn", "CheckOut"}; // Updated columns
+            "ID", "Ten", "Tuoi", "Dia Chi", "CCCD", "SDT", "CheckIn", "CheckOut","Phong Thue","Don Gia"}; // Updated columns
     // định nghĩa dữ liệu mặc định của bẳng customer là rỗng
     private Object data = new Object [][] {};
     
@@ -260,6 +266,41 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+
+    public void autoResizeColumnWidth(JTable table) {// dieu chinh kich thuoc bang tu dong
+    // Duyệt qua từng cột trong bảng
+    for (int column = 0; column < table.getColumnCount(); column++) {
+        TableColumn tableColumn = table.getColumnModel().getColumn(column);
+        int preferredWidth = tableColumn.getMinWidth();
+        int maxWidth = tableColumn.getMaxWidth();
+
+        // Duyệt qua từng hàng trong bảng để tính chiều rộng cần thiết
+        for (int row = 0; row < table.getRowCount(); row++) {
+            TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+            Component c = table.prepareRenderer(cellRenderer, row, column);
+            int width = c.getPreferredSize().width + table.getIntercellSpacing().width;
+            preferredWidth = Math.max(preferredWidth, width);
+
+            // Đảm bảo chiều rộng không vượt quá maxWidth
+            if (preferredWidth >= maxWidth) {
+                preferredWidth = maxWidth;
+                break;
+            }
+        }
+
+        // Tính chiều rộng dựa trên tiêu đề của cột
+        TableCellRenderer headerRenderer = table.getTableHeader().getDefaultRenderer();
+        Component headerComponent = headerRenderer.getTableCellRendererComponent(table, tableColumn.getHeaderValue(), false, false, 0, column);
+        int headerWidth = headerComponent.getPreferredSize().width;
+        preferredWidth = Math.max(preferredWidth, headerWidth);
+
+        // Thiết lập chiều rộng của cột
+        tableColumn.setPreferredWidth(preferredWidth);
+    }
+}
+
+
+
     // public void showTypesRoom(ArrayList<String> types){
     //     l_RoomTypes =new
     // }
@@ -268,6 +309,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
      * 
      * @param list
      */
+    
     public void showListCustomers(List<Customer> list) {
         int size = list.size();
         // với bảng customerTable có 8 cột, 
@@ -286,6 +328,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customers[i][7] = list.get(i).getCheckOut(); // New column
         }
         customerTable.setModel(new DefaultTableModel(customers, columnNames));
+        
+        autoResizeColumnWidth(customerTable); // auto resize column width
     }
     
     /**
@@ -442,7 +486,11 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         }
         return true;
     }
-    
+    public JTable getCustomerTable() {
+        return customerTable;
+    }
+
+
     public void actionPerformed(ActionEvent e) {
     }
     
@@ -484,5 +532,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
 
     public void addNavigateToRoomViewListener(ActionListener listener) {
         navigateToRoomViewBtn.addActionListener(listener);
+    }
+
+    public void addClickRoomListener(MouseListener listener){
+        customerTable.addMouseListener(listener);
     }
 }
