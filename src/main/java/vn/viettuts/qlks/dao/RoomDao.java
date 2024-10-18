@@ -38,6 +38,8 @@ public class RoomDao {
         FileUtils.writeJSONtoFile(ROOM_FILE, roomXML); // updated to JSON
     }
 
+
+
     /**
      * Đọc các đối tượng room từ file room.json
      * 
@@ -58,6 +60,7 @@ public class RoomDao {
      * 
      * @param room
      */
+
     public void add(Room room) {
         int id = 1;
         if (listRooms != null && listRooms.size() > 0) {

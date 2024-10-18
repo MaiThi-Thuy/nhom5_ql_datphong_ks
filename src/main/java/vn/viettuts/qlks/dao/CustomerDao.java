@@ -65,7 +65,6 @@ public class CustomerDao {
         listCustomers.add(customer);
         writeListCustomers(listCustomers);
     }
-
     /**
      * cập nhật customer vào listCustomers và lưu listCustomers vào file
      * 
@@ -82,6 +81,7 @@ public class CustomerDao {
                 listCustomers.get(i).setSdt(customer.getSdt());
                 listCustomers.get(i).setCheckIn(customer.getCheckIn());
                 listCustomers.get(i).setCheckOut(customer.getCheckOut());
+                listCustomers.get(i).setID_room(customer.getID_room());
                 writeListCustomers(listCustomers);
                 break;
             }

@@ -29,6 +29,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import vn.viettuts.qlks.entity.Room;
+import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Customer;
 
 public class CustomerView extends JFrame implements ActionListener, ListSelectionListener {
@@ -40,6 +41,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JButton sortCustomerCCCDBtn;
     private JButton sortCustomerNameBtn;
     private JButton navigateToRoomViewBtn; // New button
+    private JButton addRoom; // New button addRoom
     private JScrollPane jScrollPaneCustomerTable;
     private JScrollPane jScrollPaneAddress;
     private JTable customerTable;
@@ -54,6 +56,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JLabel lRoomLabel; //room label
     private JLabel checkInLabel; // New label
     private JLabel checkOutLabel; // New label
+    
 
     private JTextField idField;
     private JTextField nameField;
@@ -93,6 +96,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     public String getRoomType(){
         return (String) l_RoomTypes.getSelectedItem();
     }
+    public String getRoom(){
+        return (String) l_Rooms.getSelectedItem();
+    }
 
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -104,7 +110,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         sortCustomerCCCDBtn = new JButton("Sort By CCCD");
         sortCustomerNameBtn = new JButton("Sort By Name");
         navigateToRoomViewBtn = new JButton("Rooms"); // Initialize new button
-        
+        addRoom = new JButton("DatPhong"); // Initialize addRoom button
+
+
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
         customerTable = new JTable();
@@ -162,6 +170,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(sortCustomerCCCDBtn);
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
+        panel.add(addRoom); // Add addRoom button to panel
         panel.add(roomTypesLabel);
         panel.add(lRoomLabel); // Add new label to panel
         panel.add(checkInLabel); // Add new label to panel
@@ -252,6 +261,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.WEST, navigateToRoomViewBtn, 115, SpringLayout.WEST, sortCustomerNameBtn); // Position new button
         layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 360, SpringLayout.NORTH, panel); // Position new button
         
+        layout.putConstraint(SpringLayout.WEST, addRoom, 20, SpringLayout.WEST, panel); // Position addRoom button
+        layout.putConstraint(SpringLayout.NORTH, addRoom, 390, SpringLayout.NORTH, panel); // Position addRoom button
         this.add(panel);
         this.pack();
         this.setTitle("Customer Information");
@@ -261,6 +272,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         deleteCustomerBtn.setEnabled(false);
         // enable Add button
         addCustomerBtn.setEnabled(true);
+        addRoom.setEnabled(false);
     }
     
     public void showMessage(String message) {
@@ -310,13 +322,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
      * @param list
      */
     
-    public void showListCustomers(List<Customer> list) {
+    public void showListCustomers(List<Customer> list,RoomDao roomDao) {
         int size = list.size();
-        // với bảng customerTable có 8 cột, 
-        // khởi tạo mảng 2 chiều customers, trong đó:
-        // số hàng: là kích thước của list customer 
-        // số cột: là 8
-        Object [][] customers = new Object[size][8];
+        Object [][] customers = new Object[size][10];
         for (int i = 0; i < size; i++) {
             customers[i][0] = list.get(i).getId();
             customers[i][1] = list.get(i).getName();
@@ -326,6 +334,14 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customers[i][5] = list.get(i).getSdt();
             customers[i][6] = list.get(i).getCheckIn(); // New column
             customers[i][7] = list.get(i).getCheckOut(); // New column
+            if (list.get(i).getID_room().size() > 0) {
+                customers[i][8] = list.get(i).getID_room().size(); // New column
+                customers[i][9] = roomDao.getQLRoom().Calprice(list.get(i).getID_room());
+            }
+            else {
+                customers[i][8] = 0; // New column
+                customers[i][9] = 0; // New column
+            }
         }
         customerTable.setModel(new DefaultTableModel(customers, columnNames));
         
@@ -353,6 +369,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             deleteCustomerBtn.setEnabled(true);
             // disable Add button
             addCustomerBtn.setEnabled(false);
+            addRoom.setEnabled(true);
         }
     }
 
@@ -373,6 +390,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         deleteCustomerBtn.setEnabled(false);
         // enable Add button
         addCustomerBtn.setEnabled(true);
+        addRoom.setEnabled(false);
     }
     
     /**
@@ -394,6 +412,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         deleteCustomerBtn.setEnabled(true);
         // disable Add button
         addCustomerBtn.setEnabled(false);
+        addRoom.setEnabled(true);
     }
     
     /**
@@ -536,5 +555,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
 
     public void addClickRoomListener(MouseListener listener){
         customerTable.addMouseListener(listener);
+    }
+    public void addAddRoomListener(ActionListener listener){
+        addRoom.addActionListener(listener);
     }
 }

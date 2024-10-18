@@ -11,7 +11,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import vn.viettuts.qlks.controller.CustomerController.AddCustomerListener;
+import vn.viettuts.qlks.controller.CustomerController.AddRoom2CustomerListener;
 import vn.viettuts.qlks.controller.CustomerController.ClearCustomerListener;
+import vn.viettuts.qlks.controller.CustomerController.ClickRoomListener;
 import vn.viettuts.qlks.controller.CustomerController.DeleteCustomerListener;
 import vn.viettuts.qlks.controller.CustomerController.EditCustomerListener;
 import vn.viettuts.qlks.controller.CustomerController.ListCustomerSelectionListener;
@@ -42,15 +44,14 @@ public class CustomerController {
         view.addListCustomerSelectionListener(new ListCustomerSelectionListener());
         view.addNavigateToRoomViewListener( new NavigateRoomListener());
         view.addRoomtypesListener(new RoomTypesListener());// RoomTypes listener
-        view.addClickRoomListener(new ClickRoomListener());
-
-
+        view.addClickRoomListener(new ClickRoomListener()); //ClickRoomListener
+        view.addAddRoomListener(new AddRoom2CustomerListener());
     }
 
     public void showCustomerView() {
         List<Customer> customerList = customerDao.getListCustomers();
         customerView.setVisible(true);
-        customerView.showListCustomers(customerList);
+        customerView.showListCustomers(customerList,roomDao);
         customerView.addTypesRoom(roomDao.getQLRoom().showTypes());
     }
 
@@ -66,7 +67,7 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.add(customer);
                 customerView.showCustomer(customer);
-                customerView.showListCustomers(customerDao.getListCustomers());
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Thêm thành công!");
             }
         }
@@ -84,7 +85,7 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.edit(customer);
                 customerView.showCustomer(customer);
-                customerView.showListCustomers(customerDao.getListCustomers());
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Cập nhật thành công!");
             }
         }
@@ -102,7 +103,7 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.delete(customer);
                 customerView.clearCustomerInfo();
-                customerView.showListCustomers(customerDao.getListCustomers());
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Xóa thành công!");
             }
         }
@@ -119,7 +120,7 @@ public class CustomerController {
             customerView.clearCustomerInfo();
         }
     }
-
+    
     /**
      * Lớp SortCustomerCCCDListener 
      * chứa cài đặt cho sự kiện click button "Sort By CCCD"
@@ -142,7 +143,7 @@ public class CustomerController {
     class SortCustomerNameListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             customerDao.sortCustomerByName();
-            customerView.showListCustomers(customerDao.getListCustomers());
+            customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
         }
     }
     class NavigateRoomListener implements ActionListener {
@@ -158,7 +159,6 @@ public class CustomerController {
     //RoomTypes listener
     class RoomTypesListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            //customerView.showMessage("RoomTypes");
             customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
         }
     }
@@ -197,6 +197,26 @@ public class CustomerController {
         }
         @Override
         public void mouseExited(MouseEvent e) {
+        }
+    }
+    //add room to customer
+    class AddRoom2CustomerListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+                String RoomId = customerView.getRoom();
+                Room room = roomDao.readListRooms().get(Integer.parseInt(RoomId)-1);
+                Customer c = customerView.getCustomerInfo();
+                int cID= c.getId();
+                Customer customer =customerDao.getListCustomers().get(cID-1);
+                //customerView.showMessage(RoomId);
+            if (customer != null) {
+                customer.getID_room().add(RoomId);
+                // huy available room
+                room.setStatus(false);
+                roomDao.edit(room);
+                customerDao.edit(customer);
+                customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+            }
         }
 
     }

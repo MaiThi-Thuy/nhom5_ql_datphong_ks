@@ -13,12 +13,13 @@ public class Customer implements Serializable {
     private String sdt;
     private String checkIn;
     private String checkOut;
-    private List<Integer> ID_room; // Changed to ArrayList<Integer>
+    private List<String> ID_room; 
 
     public Customer() {
+        this.ID_room = new ArrayList<String>(); // Initialize ID_room
     }
 
-    public Customer(int id, String name, byte age, String address, String cccd, String sdt, String checkIn, String checkOut, List<Integer> ID_room) {
+    public Customer(int id, String name, byte age, String address, String cccd, String sdt, String checkIn, String checkOut, List<String> ID_room) {
         super();
         this.id = id;
         this.name = name;
@@ -95,11 +96,11 @@ public class Customer implements Serializable {
         this.checkOut = checkOut;
     }
 
-    public List<Integer> getID_room() {
+    public List<String> getID_room() {
         return ID_room;
     }
 
-    public void setID_room(List<Integer> ID_room) {
+    public void setID_room(List<String> ID_room) {
         this.ID_room = ID_room;
     }
 
