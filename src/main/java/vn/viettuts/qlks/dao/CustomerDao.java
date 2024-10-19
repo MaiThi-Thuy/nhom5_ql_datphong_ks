@@ -113,7 +113,6 @@ public class CustomerDao {
         }
         return false;
     }
-
     /**
      * sắp xếp danh sách customer theo name theo tứ tự tăng dần
      */

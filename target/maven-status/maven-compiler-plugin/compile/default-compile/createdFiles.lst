@@ -1,5 +1,7 @@
 vn\viettuts\qlks\utils\FileUtils.class
 vn\viettuts\qlks\view\CustomerView.class
+vn\viettuts\qlks\controller\CustomerRoomController$HuyPhongListener.class
+vn\viettuts\qlks\controller\CustomerRoomController$ListRoomSelectionListener.class
 vn\viettuts\qlks\controller\CustomerRoomController.class
 vn\viettuts\qlks\dao\QLRoom.class
 vn\viettuts\qlks\controller\CustomerController$DeleteCustomerListener.class

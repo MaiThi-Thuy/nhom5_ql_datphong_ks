@@ -187,10 +187,9 @@ public class CustomerController {
             int Cid=customerView.getCustomerInfo().getId();
             Customer customer=customerDao.getListCustomers().get(Cid-1);
             if(col==8){
-                customerView.showMessage("Đặt phòng cho khách hàng "+customer.getName());
                 CustomerRoomView CRView= new CustomerRoomView();
-                CustomerRoomController CRController=new CustomerRoomController(CRView);
-                CRController.showCustomerRoomView(roomDao, customer);
+                CustomerRoomController CRController=new CustomerRoomController(CRView,roomDao,customerDao,customerView);
+                CRController.showCustomerRoomView(customer);
 
             }
         }
@@ -221,7 +220,7 @@ public class CustomerController {
                 // huy available room
                 room.setStatus(false);
                 roomDao.edit(room);
-                customerDao.edit(customer);
+                customerDao.edit(customer);  
                 customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
                 customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Đặt phòng thành công!");

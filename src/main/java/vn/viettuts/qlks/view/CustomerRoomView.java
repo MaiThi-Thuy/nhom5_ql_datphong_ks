@@ -28,6 +28,8 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
     private JScrollPane jScrollPaneAddress;
     private JTable roomTable;
     
+    private JButton huyPhongBut;
+    
     // định nghĩa các cột của bảng room
     private String [] columnNames = new String [] {
             "ID", "Type", "Price", "Status"};
@@ -45,7 +47,7 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
         // khởi tạo bảng room
         jScrollPaneRoomTable = new JScrollPane();
         roomTable = new JTable();
-        
+        huyPhongBut = new JButton("Huy Phong");
         // khởi tạo các label
 
         
@@ -63,19 +65,24 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
         panel.setSize(540, 420);
         panel.setLayout(layout);
         panel.add(jScrollPaneRoomTable);
+        panel.add(huyPhongBut);
         
         layout.putConstraint(SpringLayout.WEST, jScrollPaneRoomTable, 20, SpringLayout.WEST, panel);
-        
-        
+        layout.putConstraint(SpringLayout.WEST, huyPhongBut, 20, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, huyPhongBut, 320, SpringLayout.NORTH, panel);
         
         this.add(panel);
         this.pack();
-        this.setTitle("Room Information");
         this.setSize(540, 420);
+        huyPhongBut.setEnabled(false);
     }
     
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
+    }
+    public int getSelectedRoomID(){
+        int row = roomTable.getSelectedRow();
+        return (int) roomTable.getValueAt(row, 0);
     }
     /**
      * hiển thị list room vào bảng roomTable
@@ -89,7 +96,7 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
             rooms[i][0] = list.get(i).getId();
             rooms[i][1] = list.get(i).getType();
             rooms[i][2] = list.get(i).getPrice();
-            rooms[i][3] = list.get(i).isStatus();
+            rooms[i][3] = "Dang thue";
         }
         roomTable.setModel(new DefaultTableModel(rooms, columnNames));
     }
@@ -100,9 +107,15 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
     
     public void valueChanged(ListSelectionEvent e) {
     }
-    
+    public void enableHuyPhongBut() {
+        huyPhongBut.setEnabled(true);
+    }
     
     public void addListRoomSelectionListener(ListSelectionListener listener) {
         roomTable.getSelectionModel().addListSelectionListener(listener);
     }
+    public void addHuyPhongListener(ActionListener listener) {
+        huyPhongBut.addActionListener(listener);
+    }
+    
 }

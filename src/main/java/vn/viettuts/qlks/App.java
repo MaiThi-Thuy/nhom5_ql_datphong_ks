@@ -21,7 +21,9 @@ public class App {
             CustomerView customerView = new CustomerView();
             CustomerController customerController = new CustomerController(customerView);
             customerController.showCustomerView();
-//              
+
+//              CustomerRoomView CRView= new CustomerRoomView();
+//              CRView.setVisible(true);
         });
     }
 }
