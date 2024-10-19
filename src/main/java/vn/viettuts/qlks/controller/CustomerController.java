@@ -182,10 +182,9 @@ public class CustomerController {
         @Override
         public void mouseClicked(MouseEvent e) {
              JTable table=customerView.getCustomerTable();
-            int row=table.getSelectedRow();
             int col=table.getSelectedColumn();
-            int Cid=customerView.getCustomerInfo().getId();
-            Customer customer=customerDao.getListCustomers().get(Cid-1);
+            int Cid=table.getSelectedRow();
+            Customer customer=customerDao.getListCustomers().get(Cid);
             if(col==8){
                 CustomerRoomView CRView= new CustomerRoomView();
                 CustomerRoomController CRController=new CustomerRoomController(CRView,roomDao,customerDao,customerView);

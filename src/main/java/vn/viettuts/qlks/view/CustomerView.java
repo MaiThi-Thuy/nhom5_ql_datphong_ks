@@ -420,6 +420,13 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
      * 
      * @return
      */
+    public int getSelectedCustomerID(){
+        int row = customerTable.getSelectedRow();
+        if (row >= 0) {
+            return Integer.parseInt(customerTable.getModel().getValueAt(row, 0).toString());
+        }
+        return -1;
+    }
     public Customer getCustomerInfo() {
         // validate customer
         if (!validateName() || !validateAge() || !validateAddress() || !validateCCCD() || !validateSDT()) {
