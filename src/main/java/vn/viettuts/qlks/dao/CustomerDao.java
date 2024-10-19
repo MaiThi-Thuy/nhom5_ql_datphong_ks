@@ -51,6 +51,9 @@ public class CustomerDao {
         return list;
     }
 
+    //tinh gia phong
+    
+
     /**
      * thêm customer vào listCustomers và lưu listCustomers vào file
      * 

@@ -216,6 +216,7 @@ public class CustomerController {
                 customerDao.edit(customer);
                 customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
                 customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                customerView.showMessage("Đặt phòng thành công!");
             }
         }
 

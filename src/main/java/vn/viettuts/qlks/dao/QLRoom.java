@@ -12,11 +12,10 @@ import java.util.*;
  */
 public class QLRoom {
     private TreeMap<String,List<Room>> qlLoai;
-    private HashMap<String,Room> qlRoom;
     public QLRoom(List<Room> rooms){
         this.qlLoai=new TreeMap<>();
         addRooms(rooms);
-        HashRoom(rooms);
+        
     }
     public void addRooms(List<Room> rooms){
         for (Room room : rooms) {
@@ -28,12 +27,6 @@ public class QLRoom {
             else{
                 this.qlLoai.get(room.getType()).add(room);
             }
-        }
-    }
-    public void HashRoom(List<Room> rooms){
-        this.qlRoom=new HashMap<>();
-        for(Room r:rooms){
-            this.qlRoom.put(String.valueOf(r.getId()), r);
         }
     }
     public void deleteRoom(int id){
@@ -60,12 +53,4 @@ public class QLRoom {
         }
         return arr;
     }
-    public double Calprice(List<String> ids){
-        double sum=0;
-        for(String id:ids){
-            sum+=this.qlRoom.get(id).getPrice();
-        }
-        return sum;
-    }
-    
 }

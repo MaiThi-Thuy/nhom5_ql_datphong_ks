@@ -334,9 +334,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customers[i][5] = list.get(i).getSdt();
             customers[i][6] = list.get(i).getCheckIn(); // New column
             customers[i][7] = list.get(i).getCheckOut(); // New column
-            if (list.get(i).getID_room().size() > 0) {
+            if (!list.get(i).getID_room().isEmpty()) {
                 customers[i][8] = list.get(i).getID_room().size(); // New column
-                customers[i][9] = roomDao.getQLRoom().Calprice(list.get(i).getID_room());
+                customers[i][9]= roomDao.roomPrice(list.get(i).getID_room());
             }
             else {
                 customers[i][8] = 0; // New column

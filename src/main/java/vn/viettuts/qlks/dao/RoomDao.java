@@ -71,6 +71,15 @@ public class RoomDao {
         writeListRooms(listRooms);
 
     } 
+    public double roomPrice(List<String> ID_room){
+        int price=0;
+        double s=0;
+        for(String id:ID_room){
+           int idx=Integer.parseInt(id);
+           s+=listRooms.get(idx).getPrice();
+        }
+        return s;
+    }
     /**
      * cập nhật room vào listRooms và lưu listRooms vào file
      * 
