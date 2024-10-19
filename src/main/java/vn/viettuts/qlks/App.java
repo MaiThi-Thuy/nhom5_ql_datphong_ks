@@ -8,6 +8,8 @@ import vn.viettuts.qlks.view.CustomerView;
 import vn.viettuts.qlks.controller.CustomerController;
 import vn.viettuts.qlks.view.RoomView;
 import vn.viettuts.qlks.controller.RoomController;
+import vn.viettuts.qlks.view.CustomerRoomView;
+import vn.viettuts.qlks.controller.CustomerRoomController;
 public class App {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -19,6 +21,7 @@ public class App {
             CustomerView customerView = new CustomerView();
             CustomerController customerController = new CustomerController(customerView);
             customerController.showCustomerView();
+//              
         });
     }
 }

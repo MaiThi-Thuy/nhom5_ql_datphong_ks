@@ -1,5 +1,6 @@
 vn\viettuts\qlks\utils\FileUtils.class
 vn\viettuts\qlks\view\CustomerView.class
+vn\viettuts\qlks\controller\CustomerRoomController.class
 vn\viettuts\qlks\dao\QLRoom.class
 vn\viettuts\qlks\controller\CustomerController$DeleteCustomerListener.class
 vn\viettuts\qlks\controller\RoomController$ClearRoomListener.class
@@ -10,6 +11,7 @@ vn\viettuts\qlks\dao\CustomerDao$1.class
 vn\viettuts\qlks\entity\Customer.class
 vn\viettuts\qlks\controller\RoomController$SortRoomNameListener.class
 vn\viettuts\qlks\dao\CustomerDao.class
+vn\viettuts\qlks\view\CustomerRoomView.class
 vn\viettuts\qlks\view\LoginView.class
 vn\viettuts\qlks\controller\LoginController$LoginListener.class
 vn\viettuts\qlks\controller\RoomController.class

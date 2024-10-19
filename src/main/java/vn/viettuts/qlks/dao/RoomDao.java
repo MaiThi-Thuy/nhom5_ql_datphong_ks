@@ -97,6 +97,15 @@ public class RoomDao {
             }
         }
     }
+    //show list room by ids
+    public List<Room> showListRooms(List<String> ID_room){
+        List<Room> rooms=new ArrayList<Room>();
+        for(String id:ID_room){
+            int idx=Integer.parseInt(id);
+            rooms.add(listRooms.get(idx));
+        }
+        return rooms;
+    }
     public QLRoom getQLRoom(){
         return this.qlRoom;
     }

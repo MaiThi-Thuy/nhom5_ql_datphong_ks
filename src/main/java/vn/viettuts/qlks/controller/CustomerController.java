@@ -24,6 +24,7 @@ import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Customer;
 import vn.viettuts.qlks.entity.Room;
+import vn.viettuts.qlks.view.CustomerRoomView;
 import vn.viettuts.qlks.view.CustomerView;
 import vn.viettuts.qlks.view.RoomView;
 public class CustomerController {
@@ -183,8 +184,15 @@ public class CustomerController {
              JTable table=customerView.getCustomerTable();
             int row=table.getSelectedRow();
             int col=table.getSelectedColumn();
-            Customer customer=customerDao.getListCustomers().get(row);
-            if(col==8)customerView.showMessage("Customer: "+customer.getName());
+            int Cid=customerView.getCustomerInfo().getId();
+            Customer customer=customerDao.getListCustomers().get(Cid-1);
+            if(col==8){
+                customerView.showMessage("Đặt phòng cho khách hàng "+customer.getName());
+                CustomerRoomView CRView= new CustomerRoomView();
+                CustomerRoomController CRController=new CustomerRoomController(CRView);
+                CRController.showCustomerRoomView(roomDao, customer);
+
+            }
         }
         @Override
         public void mousePressed(MouseEvent e) {
