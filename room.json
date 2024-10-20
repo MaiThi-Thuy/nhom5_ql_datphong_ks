@@ -16,13 +16,13 @@
       "id": 3,
       "type": "SuperVip",
       "price": 20000.0,
-      "status": false
+      "status": true
     },
     {
       "id": 4,
       "type": "VIP",
       "price": 10000.0,
-      "status": true
+      "status": false
     },
     {
       "id": 5,
@@ -34,13 +34,13 @@
       "id": 6,
       "type": "VIP",
       "price": 20000.0,
-      "status": true
+      "status": false
     },
     {
       "id": 7,
       "type": "VIP",
       "price": 10000.0,
-      "status": false
+      "status": true
     }
   ]
 }

@@ -82,7 +82,10 @@ public class CustomerController {
      */
     class EditCustomerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            int cid=customerView.getCustomerInfo().getId();
+            Customer tmpCustomer = customerDao.getListCustomers().get(cid-1);
             Customer customer = customerView.getCustomerInfo();
+            customer.setID_room(tmpCustomer.getID_room());
             if (customer != null) {
                 customerDao.edit(customer);
                 customerView.showCustomer(customer);

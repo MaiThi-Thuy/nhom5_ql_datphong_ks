@@ -9,7 +9,11 @@ import java.awt.event.MouseListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.text.SimpleDateFormat;
+import com.toedter.calendar.JDateChooser;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -44,7 +48,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JButton addRoom; // New button addRoom
     private JScrollPane jScrollPaneCustomerTable;
     private JScrollPane jScrollPaneAddress;
+    private SimpleDateFormat DateF;
     private JTable customerTable;
+    private JDateChooser CheckIn; // calendar
+    private JDateChooser CheckOut;
     
     private JLabel idLabel;
     private JLabel nameLabel;
@@ -64,8 +71,6 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JTextArea addressTA;
     private JTextField cccdField;
     private JTextField sdtField;
-    private JTextField checkInField; // New field
-    private JTextField checkOutField; // New field
     
     private JComboBox<String> l_RoomTypes;
     private JComboBox<String> l_Rooms;
@@ -111,8 +116,15 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         sortCustomerNameBtn = new JButton("Sort By Name");
         navigateToRoomViewBtn = new JButton("Rooms"); // Initialize new button
         addRoom = new JButton("DatPhong"); // Initialize addRoom button
-
-
+        CheckIn=new JDateChooser(); //Them checkIn
+        CheckOut=new JDateChooser();//CheckOut
+        CheckIn.setPreferredSize(new Dimension(135, 20));//setSize
+        CheckOut.setPreferredSize(new Dimension(135, 20));
+        CheckIn.setDateFormatString("dd/MM/yyyy");
+        CheckOut.setDateFormatString("dd/MM/yyyy");
+        DateF= new SimpleDateFormat("dd/MM/yyyy");
+        
+        
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
         customerTable = new JTable();
@@ -140,12 +152,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         jScrollPaneAddress.setViewportView(addressTA);
         cccdField = new JTextField(15);
         sdtField = new JTextField(15);
-        checkInField = new JTextField(15); // Initialize new field
-        checkOutField = new JTextField(15); // Initialize new field
         
         // roomtypes show test
-        l_RoomTypes = new JComboBox<String>();
-        l_Rooms = new JComboBox<String>();
+        l_RoomTypes = new JComboBox<>();
+        l_Rooms = new JComboBox<>();
 //        l_RoomTypes.addItem("VIP");
 //        l_RoomTypes.addItem("Normal");
         
@@ -176,7 +186,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(checkInLabel); // Add new label to panel
         panel.add(checkOutLabel); // Add new label to panel
 
-
+        
         panel.add(idLabel);
         panel.add(nameLabel);
         panel.add(ageLabel);
@@ -190,10 +200,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(jScrollPaneAddress);
         panel.add(cccdField);
         panel.add(sdtField);
-        panel.add(checkInField); // Add new field to panel
-        panel.add(checkOutField); // Add new field to panel
         panel.add(l_RoomTypes);// add roomtypes to panel
         panel.add(l_Rooms);// add rooms to panel
+        panel.add(CheckIn);//add CheckIn
+        panel.add(CheckOut);//add CheckOut
         //label
         layout.putConstraint(SpringLayout.WEST, idLabel, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, idLabel, 10, SpringLayout.NORTH, panel);
@@ -232,10 +242,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, sdtField, 170, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, l_RoomTypes, 100, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, l_RoomTypes, 200, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, checkInField, 100, SpringLayout.WEST, panel); // Position new field
-        layout.putConstraint(SpringLayout.NORTH, checkInField, 230, SpringLayout.NORTH, panel); // Position new field
-        layout.putConstraint(SpringLayout.WEST, checkOutField, 100, SpringLayout.WEST, panel); // Position new field
-        layout.putConstraint(SpringLayout.NORTH, checkOutField, 260, SpringLayout.NORTH, panel); // Position new field
+        layout.putConstraint(SpringLayout.WEST, CheckIn, 100, SpringLayout.WEST, panel); // Position new field
+        layout.putConstraint(SpringLayout.NORTH, CheckIn, 230, SpringLayout.NORTH, panel); // Position new field
+        layout.putConstraint(SpringLayout.WEST, CheckOut, 100, SpringLayout.WEST, panel); // Position new field
+        layout.putConstraint(SpringLayout.NORTH, CheckOut, 260, SpringLayout.NORTH, panel); // Position new field
         layout.putConstraint(SpringLayout.WEST, l_Rooms, 100, SpringLayout.WEST, panel); // Position new field
         layout.putConstraint(SpringLayout.NORTH, l_Rooms, 290, SpringLayout.NORTH, panel); // Position new field
 
@@ -362,8 +372,14 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             addressTA.setText(customerTable.getModel().getValueAt(row, 3).toString());
             cccdField.setText(customerTable.getModel().getValueAt(row, 4).toString());
             sdtField.setText(customerTable.getModel().getValueAt(row, 5).toString());
-            checkInField.setText(customerTable.getModel().getValueAt(row, 6).toString()); // New field
-            checkOutField.setText(customerTable.getModel().getValueAt(row, 7).toString()); // New field
+            try {
+                CheckIn.setDate(DateF.parse(customerTable.getModel().getValueAt(row, 6).toString()));
+                CheckOut.setDate(DateF.parse(customerTable.getModel().getValueAt(row, 7).toString()));
+            } catch (ParseException ex) {
+                Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+
             // enable Edit and Delete buttons
             editCustomerBtn.setEnabled(true);
             deleteCustomerBtn.setEnabled(true);
@@ -383,8 +399,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addressTA.setText("");
         cccdField.setText("");
         sdtField.setText("");
-        checkInField.setText(""); // Clear new field
-        checkOutField.setText(""); // Clear new field
+        CheckIn.setDate(null);
+        CheckOut.setDate(null);
         // disable Edit and Delete buttons
         editCustomerBtn.setEnabled(false);
         deleteCustomerBtn.setEnabled(false);
@@ -405,8 +421,12 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addressTA.setText(customer.getAddress());
         cccdField.setText("" + customer.getCccd());
         sdtField.setText(""+customer.getSdt());
-        checkInField.setText(customer.getCheckIn()); // New field
-        checkOutField.setText(customer.getCheckOut()); // New field
+        try {
+            CheckIn.setDate(DateF.parse(customer.getCheckIn()));
+            CheckOut.setDate(DateF.parse(customer.getCheckOut()));
+        } catch (ParseException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // enable Edit and Delete buttons
         editCustomerBtn.setEnabled(true);
         deleteCustomerBtn.setEnabled(true);
@@ -442,8 +462,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customer.setAddress(addressTA.getText().trim());
             customer.setCccd(cccdField.getText().trim());
             customer.setSdt(sdtField.getText().trim());
-            customer.setCheckIn(checkInField.getText().trim()); // New field
-            customer.setCheckOut(checkOutField.getText().trim()); // New field
+            customer.setCheckIn(DateF.format(CheckIn.getDate())); // New field
+            customer.setCheckOut(DateF.format(CheckOut.getDate())); // New field
             return customer;
         } catch (Exception e) {
             showMessage(e.getMessage());
