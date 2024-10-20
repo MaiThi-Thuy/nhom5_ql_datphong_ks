@@ -55,11 +55,11 @@ public class CustomerRoomController {
             room.setStatus(true);
             roomDao.edit(room);
             List<String> roomIds=customer.getID_room();
-            System.out.println(roomIds);
             roomIds.remove(String.valueOf(RoomId-1));
-            System.out.println(roomIds);
+            System.out.println((RoomId-1) +""+ room.isStatus()+roomDao.readListRooms().get(RoomId-1).isStatus());
             customer.setID_room(roomIds);
             customerDao.edit(customer);
+
             customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
             try {
                 customerView.showListCustomers(customerDao.getListCustomers(),roomDao);

@@ -235,13 +235,14 @@ public class CustomerController {
     class AddRoom2CustomerListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
                 String RoomId = customerView.getRoom();
-                Room room = roomDao.readListRooms().get(Integer.parseInt(RoomId)-1);
+                int RoomId_t=Integer.parseInt(RoomId);
+                Room room = roomDao.readListRooms().get(RoomId_t-1);
                 Customer c = customerView.getCustomerInfo();
                 int cID= c.getId();
                 Customer customer =customerDao.getListCustomers().get(cID-1);
                 //customerView.showMessage(RoomId);
             if (customer != null) {
-                customer.getID_room().add(RoomId);
+                customer.getID_room().add(String.valueOf(RoomId_t-1));
                 // huy available room
                 room.setStatus(false);
                 roomDao.edit(room);

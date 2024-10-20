@@ -8,23 +8,8 @@
       "cccd": "0123456789",
       "sdt": "0123456789",
       "checkIn": "16/01/2024",
-      "checkOut": "31/01/2024",
-      "ID_room": [
-        "2"
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Nguyen",
-      "age": 21,
-      "address": "Hai Phong",
-      "cccd": "0123456789",
-      "sdt": "0123456789",
-      "checkIn": "22/01/2024",
-      "checkOut": "24/01/2024",
-      "ID_room": [
-        "1"
-      ]
+      "checkOut": "20/01/2024",
+      "ID_room": []
     },
     {
       "id": 3,
@@ -35,9 +20,18 @@
       "sdt": "0123456789",
       "checkIn": "13/03/2024",
       "checkOut": "17/03/2024",
-      "ID_room": [
-        "4"
-      ]
+      "ID_room": []
+    },
+    {
+      "id": 2,
+      "name": "Nguyen",
+      "age": 21,
+      "address": "Hai Phong",
+      "cccd": "0123456789",
+      "sdt": "0123456789",
+      "checkIn": "22/01/2024",
+      "checkOut": "24/01/2024",
+      "ID_room": []
     },
     {
       "id": 4,
@@ -48,9 +42,7 @@
       "sdt": "0123456789",
       "checkIn": "01/10/2024",
       "checkOut": "03/10/2024",
-      "ID_room": [
-        "6"
-      ]
+      "ID_room": []
     }
   ]
 }

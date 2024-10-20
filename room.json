@@ -4,13 +4,13 @@
       "id": 1,
       "type": "VIP",
       "price": 10000.0,
-      "status": false
+      "status": true
     },
     {
       "id": 2,
       "type": "Normal",
       "price": 5000.0,
-      "status": false
+      "status": true
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "id": 4,
       "type": "VIP",
       "price": 10000.0,
-      "status": false
+      "status": true
     },
     {
       "id": 5,
@@ -34,7 +34,7 @@
       "id": 6,
       "type": "VIP",
       "price": 20000.0,
-      "status": false
+      "status": true
     },
     {
       "id": 7,
