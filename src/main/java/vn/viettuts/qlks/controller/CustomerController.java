@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 
 import javax.swing.event.ListSelectionEvent;
@@ -52,7 +55,11 @@ public class CustomerController {
     public void showCustomerView() {
         List<Customer> customerList = customerDao.getListCustomers();
         customerView.setVisible(true);
-        customerView.showListCustomers(customerList,roomDao);
+        try {
+            customerView.showListCustomers(customerList,roomDao);
+        } catch (ParseException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         customerView.addTypesRoom(roomDao.getQLRoom().showTypes());
     }
 
@@ -68,7 +75,11 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.add(customer);
                 customerView.showCustomer(customer);
-                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                try {
+                    customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 customerView.showMessage("Thêm thành công!");
             }
         }
@@ -89,7 +100,11 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.edit(customer);
                 customerView.showCustomer(customer);
-                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                try {
+                    customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 customerView.showMessage("Cập nhật thành công!");
             }
         }
@@ -107,7 +122,11 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.delete(customer);
                 customerView.clearCustomerInfo();
-                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                try {
+                    customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 customerView.showMessage("Xóa thành công!");
             }
         }
@@ -147,7 +166,11 @@ public class CustomerController {
     class SortCustomerNameListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             customerDao.sortCustomerByName();
-            customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+            try {
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+            } catch (ParseException ex) {
+                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     class NavigateRoomListener implements ActionListener {
@@ -224,7 +247,11 @@ public class CustomerController {
                 roomDao.edit(room);
                 customerDao.edit(customer);  
                 customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
-                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                    try {
+                        customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 customerView.showMessage("Đặt phòng thành công!");
             }
         }

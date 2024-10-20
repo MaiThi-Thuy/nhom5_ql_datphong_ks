@@ -2,10 +2,13 @@ package vn.viettuts.qlks.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.dao.UserDao;
@@ -58,7 +61,11 @@ public class CustomerRoomController {
             customer.setID_room(roomIds);
             customerDao.edit(customer);
             customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
-            customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+            try {
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+            } catch (ParseException ex) {
+                Logger.getLogger(CustomerRoomController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             customerView.showMessage("Hủy phòng thành công!");
             crView.showListRooms(roomDao.showListRooms(customer.getID_room()));
             

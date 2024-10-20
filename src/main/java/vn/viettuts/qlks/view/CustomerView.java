@@ -10,6 +10,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import com.toedter.calendar.JDateChooser;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -332,21 +336,28 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
      * @param list
      */
     
-    public void showListCustomers(List<Customer> list,RoomDao roomDao) {
+    public void showListCustomers(List<Customer> list,RoomDao roomDao) throws ParseException {
         int size = list.size();
         Object [][] customers = new Object[size][10];
         for (int i = 0; i < size; i++) {
+            String dateIN= list.get(i).getCheckIn();
+            String dateOUT= list.get(i).getCheckOut();
             customers[i][0] = list.get(i).getId();
             customers[i][1] = list.get(i).getName();
             customers[i][2] = list.get(i).getAge();
             customers[i][3] = list.get(i).getAddress();
             customers[i][4] = list.get(i).getCccd();
             customers[i][5] = list.get(i).getSdt();
-            customers[i][6] = list.get(i).getCheckIn(); // New column
-            customers[i][7] = list.get(i).getCheckOut(); // New column
+            customers[i][6] = dateIN;
+            customers[i][7] = dateOUT;
             if (!list.get(i).getID_room().isEmpty()) {
+                
                 customers[i][8] = list.get(i).getID_room().size(); // New column
-                customers[i][9]= roomDao.roomPrice(list.get(i).getID_room());
+                try {
+                    customers[i][9]= roomDao.roomPrice(list.get(i).getID_room())*calculateDaysBetween(DateF.parse(dateIN),DateF.parse(dateOUT));
+                } catch (ParseException ex) {
+                    Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else {
                 customers[i][8] = 0; // New column
@@ -409,6 +420,19 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addRoom.setEnabled(false);
     }
     
+    //Tinh so ngay thue
+    public static int calculateDaysBetween(Date startDate, Date endDate) {
+        // Convert Date to LocalDate
+        LocalDate startLocalDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate endLocalDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // Calculate the difference in days
+        long daysBetween = ChronoUnit.DAYS.between(startLocalDate, endLocalDate);
+
+        // Return the difference as an int
+        return (int) daysBetween;
+    }
+
     /**
      * hiện thị thông tin customer
      * 
