@@ -3,6 +3,7 @@ package vn.viettuts.qlks.view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -163,18 +164,27 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+    
+    //fomat gia
+         public static String formatDoubleToString(double value) {
+        // Create a DecimalFormat instance
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        // Format the double value to a string
+        return decimalFormat.format(value);
+    }
     /**
      * hiển thị list room vào bảng roomTable
      * 
      * @param list
      */
+    
     public void showListRooms(List<Room> list) {
         int size = list.size();
         Object [][] rooms = new Object[size][4];
         for (int i = 0; i < size; i++) {
             rooms[i][0] = list.get(i).getId();
             rooms[i][1] = list.get(i).getType();
-            rooms[i][2] = list.get(i).getPrice();
+            rooms[i][2] = formatDoubleToString(list.get(i).getPrice());
             rooms[i][3] = list.get(i).isStatus();
         }
         roomTable.setModel(new DefaultTableModel(rooms, columnNames));

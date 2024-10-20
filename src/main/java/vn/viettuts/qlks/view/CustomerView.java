@@ -15,6 +15,8 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import com.toedter.calendar.JDateChooser;
+
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -324,12 +326,14 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         tableColumn.setPreferredWidth(preferredWidth);
     }
 }
+//fomat gia
+         public static String formatDoubleToString(double value) {
+        // Create a DecimalFormat instance
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        // Format the double value to a string
+        return decimalFormat.format(value);
+    }
 
-
-
-    // public void showTypesRoom(ArrayList<String> types){
-    //     l_RoomTypes =new
-    // }
     /**
      * hiển thị list customer vào bảng customerTable
      * 
@@ -354,14 +358,14 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
                 
                 customers[i][8] = list.get(i).getID_room().size(); // New column
                 try {
-                    customers[i][9]= roomDao.roomPrice(list.get(i).getID_room())*calculateDaysBetween(DateF.parse(dateIN),DateF.parse(dateOUT));
+                    customers[i][9]= formatDoubleToString(roomDao.roomPrice(list.get(i).getID_room())*calculateDaysBetween(DateF.parse(dateIN),DateF.parse(dateOUT)));
                 } catch (ParseException ex) {
                     Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else {
                 customers[i][8] = 0; // New column
-                customers[i][9] = 0; // New column
+                customers[i][9] = formatDoubleToString(0.0); // New column
             }
         }
         customerTable.setModel(new DefaultTableModel(customers, columnNames));
