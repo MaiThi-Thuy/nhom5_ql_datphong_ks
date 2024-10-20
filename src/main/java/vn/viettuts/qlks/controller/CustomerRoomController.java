@@ -9,6 +9,8 @@ import javax.swing.event.ListSelectionListener;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import vn.viettuts.qlks.controller.CustomerRoomController.HuyPhongListener;
 import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.dao.UserDao;
@@ -56,8 +58,8 @@ public class CustomerRoomController {
             roomDao.edit(room);
             List<String> roomIds=customer.getID_room();
             roomIds.remove(String.valueOf(RoomId-1));
-            System.out.println((RoomId-1) +""+ room.isStatus()+roomDao.readListRooms().get(RoomId-1).isStatus());
             customer.setID_room(roomIds);
+            customer.setTotalPrice(roomDao.roomPrice(customer.getID_room())*customerView.calculateDaysBetween(customer.getCheckIn(),customer.getCheckOut()));
             customerDao.edit(customer);
 
             customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));

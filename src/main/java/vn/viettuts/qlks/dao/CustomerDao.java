@@ -50,7 +50,14 @@ public class CustomerDao {
         else System.out.println("not found");
         return list;
     }
-
+    public Customer searchCustomer(int id) {
+        for (Customer customer : listCustomers) {
+            if (customer.getId() == id) {
+                return customer;
+            }
+        }
+        return null;
+    }
     //tinh gia phong
     
 
@@ -85,6 +92,7 @@ public class CustomerDao {
                 listCustomers.get(i).setCheckIn(customer.getCheckIn());
                 listCustomers.get(i).setCheckOut(customer.getCheckOut());
                 listCustomers.get(i).setID_room(customer.getID_room());
+                listCustomers.get(i).setTotalPrice(customer.getTotalPrice());
                 writeListCustomers(listCustomers);
                 break;
             }
@@ -125,15 +133,15 @@ public class CustomerDao {
     }
 
     /**
-     * sắp xếp danh sách customer theo CCCD theo tứ tự tăng dần
+     * sắp xếp danh sách customer theo TotalPrice theo tứ tự tăng dần
      */
-//    public void sortCustomerByCCCD() {
-//        Collections.sort(listCustomers, new Comparator<Customer>() {
-//            public int compare(Customer customer1, Customer customer2) {
-//                return Float.compare(customer1.getCccd(), customer2.getCccd());
-//            }
-//        });
-//    }
+   public void sortCustomerByPrice() {
+       Collections.sort(listCustomers, new Comparator<Customer>() {
+           public int compare(Customer customer1, Customer customer2) {
+               return Double.compare(customer1.getTotalPrice(), customer2.getTotalPrice());
+           }
+       });
+   }
 
     public List<Customer> getListCustomers() {
         return listCustomers;

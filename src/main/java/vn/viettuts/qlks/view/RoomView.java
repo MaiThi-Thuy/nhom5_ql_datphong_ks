@@ -196,11 +196,12 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
      */
     public void fillRoomFromSelectedRow() {
         // lấy chỉ số của hàng được chọn 
+        
         int row = roomTable.getSelectedRow();
         if (row >= 0) {
             idField.setText(roomTable.getModel().getValueAt(row, 0).toString());
             typeField.setText(roomTable.getModel().getValueAt(row, 1).toString());
-            priceField.setText(roomTable.getModel().getValueAt(row, 2).toString());
+            priceField.setText(roomTable.getModel().getValueAt(row, 2).toString().replace(".", ""));
             statusField.setText(roomTable.getModel().getValueAt(row, 3).toString());
         }
     }

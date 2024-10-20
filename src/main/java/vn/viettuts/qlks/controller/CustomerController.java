@@ -4,12 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -43,7 +44,7 @@ public class CustomerController {
         view.addEdiCustomerListener(new EditCustomerListener());
         view.addDeleteCustomerListener(new DeleteCustomerListener());
         view.addClearListener(new ClearCustomerListener());
-        //view.addSortCustomerCCCDListener(new SortCustomerCCCDListener());
+        view.addSortCustomerPriceListener(new SortCustomerPriceListener());
         view.addSortCustomerNameListener(new SortCustomerNameListener());
         view.addListCustomerSelectionListener(new ListCustomerSelectionListener());
         view.addNavigateToRoomViewListener( new NavigateRoomListener());
@@ -93,11 +94,13 @@ public class CustomerController {
      */
     class EditCustomerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            int cid=customerView.getCustomerInfo().getId();
-            Customer tmpCustomer = customerDao.getListCustomers().get(cid-1);
+            int cid=customerView.getSelectedCustomerID();
+            Customer tmpCustomer = customerDao.searchCustomer(cid);
             Customer customer = customerView.getCustomerInfo();
             customer.setID_room(tmpCustomer.getID_room());
             if (customer != null) {
+                customer.setTotalPrice(roomDao.roomPrice(customer.getID_room())*customerView.calculateDaysBetween(customer.getCheckIn(),customer.getCheckOut()));
+                System.out.println(customer.getTotalPrice());
                 customerDao.edit(customer);
                 customerView.showCustomer(customer);
                 try {
@@ -150,12 +153,16 @@ public class CustomerController {
      * 
      * @author viettuts.vn
      */
-//    class SortCustomerCCCDListener implements ActionListener {
-//        public void actionPerformed(ActionEvent e) {
-//            customerDao.sortCustomerByCCCD();
-//            customerView.showListCustomers(customerDao.getListCustomers());
-//        }
-//    }
+   class SortCustomerPriceListener implements ActionListener {
+       public void actionPerformed(ActionEvent e) {
+           customerDao.sortCustomerByPrice();
+           try {
+               customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+           } catch (ParseException ex) {
+               Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+   }
 
     /**
      * Lớp SortCustomerCCCDListener 
@@ -237,15 +244,16 @@ public class CustomerController {
                 String RoomId = customerView.getRoom();
                 int RoomId_t=Integer.parseInt(RoomId);
                 Room room = roomDao.readListRooms().get(RoomId_t-1);
-                Customer c = customerView.getCustomerInfo();
-                int cID= c.getId();
-                Customer customer =customerDao.getListCustomers().get(cID-1);
+                int cID= customerView.getSelectedCustomerID();
+                Customer customer =customerDao.searchCustomer(cID);
                 //customerView.showMessage(RoomId);
             if (customer != null) {
                 customer.getID_room().add(String.valueOf(RoomId_t-1));
-                // huy available room
+                
                 room.setStatus(false);
                 roomDao.edit(room);
+                customer.setTotalPrice(roomDao.roomPrice(customer.getID_room())*customerView.calculateDaysBetween(customer.getCheckIn(),customer.getCheckOut()));
+                System.out.println(customer.getTotalPrice());
                 customerDao.edit(customer);  
                 customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
                     try {

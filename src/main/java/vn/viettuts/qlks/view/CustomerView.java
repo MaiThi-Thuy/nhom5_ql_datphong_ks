@@ -48,7 +48,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JButton editCustomerBtn;
     private JButton deleteCustomerBtn;
     private JButton clearBtn;
-    private JButton sortCustomerCCCDBtn;
+    private JButton sortCustomerByPriceBtn;
     private JButton sortCustomerNameBtn;
     private JButton navigateToRoomViewBtn; // New button
     private JButton addRoom; // New button addRoom
@@ -118,7 +118,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         editCustomerBtn = new JButton("Edit");
         deleteCustomerBtn = new JButton("Delete");
         clearBtn = new JButton("Clear");
-        sortCustomerCCCDBtn = new JButton("Sort By CCCD");
+        sortCustomerByPriceBtn = new JButton("Sort By Don gia");
         sortCustomerNameBtn = new JButton("Sort By Name");
         navigateToRoomViewBtn = new JButton("Rooms"); // Initialize new button
         addRoom = new JButton("DatPhong"); // Initialize addRoom button
@@ -183,7 +183,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(editCustomerBtn);
         panel.add(deleteCustomerBtn);
         panel.add(clearBtn);
-        panel.add(sortCustomerCCCDBtn);
+        panel.add(sortCustomerByPriceBtn);
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
         panel.add(addRoom); // Add addRoom button to panel
@@ -269,9 +269,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.WEST, clearBtn, 80, SpringLayout.WEST, deleteCustomerBtn);
         
         layout.putConstraint(SpringLayout.NORTH, deleteCustomerBtn, 360, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, sortCustomerCCCDBtn, 300, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, sortCustomerCCCDBtn, 360, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, sortCustomerNameBtn, 115, SpringLayout.WEST, sortCustomerCCCDBtn);
+        layout.putConstraint(SpringLayout.WEST, sortCustomerByPriceBtn, 300, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, sortCustomerByPriceBtn, 360, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, sortCustomerNameBtn, 115, SpringLayout.WEST, sortCustomerByPriceBtn);
         layout.putConstraint(SpringLayout.NORTH, sortCustomerNameBtn, 360, SpringLayout.NORTH, panel);
         
         layout.putConstraint(SpringLayout.WEST, navigateToRoomViewBtn, 115, SpringLayout.WEST, sortCustomerNameBtn); // Position new button
@@ -344,24 +344,17 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         int size = list.size();
         Object [][] customers = new Object[size][10];
         for (int i = 0; i < size; i++) {
-            String dateIN= list.get(i).getCheckIn();
-            String dateOUT= list.get(i).getCheckOut();
             customers[i][0] = list.get(i).getId();
             customers[i][1] = list.get(i).getName();
             customers[i][2] = list.get(i).getAge();
             customers[i][3] = list.get(i).getAddress();
             customers[i][4] = list.get(i).getCccd();
             customers[i][5] = list.get(i).getSdt();
-            customers[i][6] = dateIN;
-            customers[i][7] = dateOUT;
+            customers[i][6] = DateF.format(list.get(i).getCheckIn());
+            customers[i][7] = DateF.format(list.get(i).getCheckOut());
             if (!list.get(i).getID_room().isEmpty()) {
-                
                 customers[i][8] = list.get(i).getID_room().size(); // New column
-                try {
-                    customers[i][9]= formatDoubleToString(roomDao.roomPrice(list.get(i).getID_room())*calculateDaysBetween(DateF.parse(dateIN),DateF.parse(dateOUT)));
-                } catch (ParseException ex) {
-                    Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                customers[i][9]= formatDoubleToString(list.get(i).getTotalPrice()); 
             }
             else {
                 customers[i][8] = 0; // New column
@@ -449,12 +442,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addressTA.setText(customer.getAddress());
         cccdField.setText("" + customer.getCccd());
         sdtField.setText(""+customer.getSdt());
-        try {
-            CheckIn.setDate(DateF.parse(customer.getCheckIn()));
-            CheckOut.setDate(DateF.parse(customer.getCheckOut()));
-        } catch (ParseException ex) {
-            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            CheckIn.setDate(customer.getCheckIn());
+            CheckOut.setDate(customer.getCheckOut());
         // enable Edit and Delete buttons
         editCustomerBtn.setEnabled(true);
         deleteCustomerBtn.setEnabled(true);
@@ -490,8 +479,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
             customer.setAddress(addressTA.getText().trim());
             customer.setCccd(cccdField.getText().trim());
             customer.setSdt(sdtField.getText().trim());
-            customer.setCheckIn(DateF.format(CheckIn.getDate())); // New field
-            customer.setCheckOut(DateF.format(CheckOut.getDate())); // New field
+            customer.setCheckIn(CheckIn.getDate()); // New field
+            customer.setCheckOut(CheckOut.getDate()); // New field
             return customer;
         } catch (Exception e) {
             showMessage(e.getMessage());
@@ -587,8 +576,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         clearBtn.addActionListener(listener);
     }
     
-    public void addSortCustomerCCCDListener(ActionListener listener) {
-        sortCustomerCCCDBtn.addActionListener(listener);
+    public void addSortCustomerPriceListener(ActionListener listener) {
+        sortCustomerByPriceBtn.addActionListener(listener);
     }
     
     public void addSortCustomerNameListener(ActionListener listener) {

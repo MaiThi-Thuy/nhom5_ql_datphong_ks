@@ -1,6 +1,7 @@
 package vn.viettuts.qlks.entity;
 
 import java.io.Serializable;
+
 import java.util.*;
 
 public class Customer implements Serializable {
@@ -11,15 +12,16 @@ public class Customer implements Serializable {
     private String address;
     private String cccd;
     private String sdt;
-    private String checkIn;
-    private String checkOut;
+    private Date checkIn;
+    private Date checkOut;
     private List<String> ID_room; 
+    private double totalPrice;
 
     public Customer() {
         this.ID_room = new ArrayList<String>(); // Initialize ID_room
     }
 
-    public Customer(int id, String name, byte age, String address, String cccd, String sdt, String checkIn, String checkOut, List<String> ID_room) {
+    public Customer(int id, String name, byte age, String address, String cccd, String sdt, Date checkIn, Date checkOut, List<String> ID_room) {
         super();
         this.id = id;
         this.name = name;
@@ -30,6 +32,7 @@ public class Customer implements Serializable {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.ID_room = ID_room; // Initialize ID_room
+        this.totalPrice = 0;
     }
 
     public int getId() {
@@ -80,19 +83,19 @@ public class Customer implements Serializable {
         this.sdt = sdt;
     }
 
-    public String getCheckIn() {
+    public Date getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(String checkIn) {
+    public void setCheckIn(Date checkIn) {
         this.checkIn = checkIn;
     }
 
-    public String getCheckOut() {
+    public Date getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(String checkOut) {
+    public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
     }
 
@@ -103,7 +106,12 @@ public class Customer implements Serializable {
     public void setID_room(List<String> ID_room) {
         this.ID_room = ID_room;
     }
-
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
     @Override
     public String toString() {
         return "Customer [id=" + id + ", name=" + name + ", age=" + age +
