@@ -39,9 +39,10 @@
       "checkIn": "Oct 1, 2024, 12:00:00 AM",
       "checkOut": "Oct 31, 2024, 12:00:00 AM",
       "ID_room": [
-        "1"
+        "1",
+        "5"
       ],
-      "totalPrice": 150000.0
+      "totalPrice": 750000.0
     },
     {
       "id": 4,
@@ -56,6 +57,20 @@
         "3"
       ],
       "totalPrice": 300000.0
+    },
+    {
+      "id": 5,
+      "name": "Nam",
+      "age": 20,
+      "address": "Ninh Binh",
+      "cccd": "0123456789",
+      "sdt": "0123456789",
+      "checkIn": "Oct 21, 2024, 12:00:00 AM",
+      "checkOut": "Oct 24, 2024, 10:23:52 PM",
+      "ID_room": [
+        "6"
+      ],
+      "totalPrice": 30000.0
     }
   ]
 }

@@ -63,11 +63,7 @@ public class CustomerRoomController {
             customerDao.edit(customer);
 
             customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
-            try {
-                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-            } catch (ParseException ex) {
-                Logger.getLogger(CustomerRoomController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
             customerView.showMessage("Hủy phòng thành công!");
             crView.showListRooms(roomDao.showListRooms(customer.getID_room()));
             

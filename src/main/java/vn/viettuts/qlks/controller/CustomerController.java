@@ -57,12 +57,9 @@ public class CustomerController {
     public void showCustomerView() {
         List<Customer> customerList = customerDao.getListCustomers();
         customerView.setVisible(true);
-        try {
+        
             customerView.showListCustomers(customerList,roomDao);
-        } catch (ParseException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        customerView.addTypesRoom(roomDao.getQLRoom().showTypes());
+            customerView.addTypesRoom(roomDao.getQLRoom().showTypes());
     }
 
     /**
@@ -77,11 +74,7 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.add(customer);
                 customerView.showCustomer(customer);
-                try {
-                    customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-                } catch (ParseException ex) {
-                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Thêm thành công!");
             }
         }
@@ -104,11 +97,9 @@ public class CustomerController {
                 System.out.println(customer.getTotalPrice());
                 customerDao.edit(customer);
                 customerView.showCustomer(customer);
-                try {
-                    customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-                } catch (ParseException ex) {
-                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
+                
                 customerView.showMessage("Cập nhật thành công!");
             }
         }
@@ -126,11 +117,7 @@ public class CustomerController {
             if (customer != null) {
                 customerDao.delete(customer);
                 customerView.clearCustomerInfo();
-                try {
-                    customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-                } catch (ParseException ex) {
-                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Xóa thành công!");
             }
         }
@@ -157,11 +144,7 @@ public class CustomerController {
    class SortCustomerPriceListener implements ActionListener {
        public void actionPerformed(ActionEvent e) {
            customerDao.sortCustomerByPrice();
-           try {
                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-           } catch (ParseException ex) {
-               Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-           }
        }
    }
 
@@ -174,11 +157,7 @@ public class CustomerController {
     class SortCustomerNameListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             customerDao.sortCustomerByName();
-            try {
-                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-            } catch (ParseException ex) {
-                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
         }
     }
     class NavigateRoomListener implements ActionListener {
@@ -257,22 +236,14 @@ public class CustomerController {
                 System.out.println(customer.getTotalPrice());
                 customerDao.edit(customer);  
                 customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
-                    try {
-                        customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
                 customerView.showMessage("Đặt phòng thành công!");
             }
         }
     }
     class SearchCustomer implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            try {
-                customerView.showListCustomers(customerDao.searchCustomer(customerView.getKeyWord()),roomDao);
-            } catch (ParseException ex) {
-                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            customerView.showListCustomers(customerDao.searchCustomer(customerView.getKeyWord()),roomDao);
         }
     }
 }

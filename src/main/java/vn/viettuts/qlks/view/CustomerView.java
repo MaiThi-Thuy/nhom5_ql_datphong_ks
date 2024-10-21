@@ -302,6 +302,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         // enable Add button
         addCustomerBtn.setEnabled(true);
         addRoom.setEnabled(false);
+        
     }
     
     public void showMessage(String message) {
@@ -353,7 +354,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
      * @param list
      */
     
-    public void showListCustomers(List<Customer> list,RoomDao roomDao) throws ParseException {
+    public void showListCustomers(List<Customer> list,RoomDao roomDao) {
         int size = list.size();
         Object [][] customers = new Object[size][10];
         for (int i = 0; i < size; i++) {
@@ -484,7 +485,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     }
     public Customer getCustomerInfo() {
         // validate customer
-        if (!validateName() || !validateAge() || !validateAddress() || !validateCCCD() || !validateSDT()) {
+        if (!validateName() || !validateAge() || !validateAddress() || !validateCCCD() || !validateSDT()|| !validateCheckIn()|| !validateCheckOut()) {
             return null;
         }
         try {
@@ -563,6 +564,24 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         if (sdt == null || "".equals(sdt.trim())) {
             sdtField.requestFocus();
             showMessage("SDT không được trống.");
+            return false;
+        }
+        return true;
+    }
+    private boolean validateCheckIn() {
+        Date checkIn = CheckIn.getDate();
+        if (checkIn == null) {
+            CheckIn.requestFocus();
+            showMessage("CheckIn không được trống.");
+            return false;
+        }
+        return true;
+    }
+    private boolean validateCheckOut() {
+        Date checkOut = CheckOut.getDate();
+        if (checkOut == null) {
+            CheckOut.requestFocus();
+            showMessage("CheckOut không được trống.");
             return false;
         }
         return true;
