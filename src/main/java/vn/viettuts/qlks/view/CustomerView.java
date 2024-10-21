@@ -58,7 +58,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JTable customerTable;
     private JDateChooser CheckIn; // calendar
     private JDateChooser CheckOut;
-    
+    private JButton searchButton;
+
     private JLabel idLabel;
     private JLabel nameLabel;
     private JLabel ageLabel;
@@ -69,6 +70,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JLabel lRoomLabel; //room label
     private JLabel checkInLabel; // New label
     private JLabel checkOutLabel; // New label
+    private JLabel searchLabel; //search label
     
 
     private JTextField idField;
@@ -77,6 +79,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JTextArea addressTA;
     private JTextField cccdField;
     private JTextField sdtField;
+    private JTextField searchField;//search field
     
     private JComboBox<String> l_RoomTypes;
     private JComboBox<String> l_Rooms;
@@ -129,7 +132,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         CheckIn.setDateFormatString("dd/MM/yyyy");
         CheckOut.setDateFormatString("dd/MM/yyyy");
         DateF= new SimpleDateFormat("dd/MM/yyyy");
-        
+        searchButton=new JButton("Search");
         
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
@@ -145,7 +148,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         lRoomLabel = new JLabel("Rooms"); // Initialize rooms label
         checkInLabel = new JLabel("CheckIn"); // Initialize new label
         checkOutLabel = new JLabel("CheckOut"); // Initialize new label
-        
+        searchLabel=new JLabel("Tim Kiem");//tim kiem label
+
         // khởi tạo các trường nhập dữ liệu cho customer
         idField = new JTextField(6);
         idField.setEditable(false);
@@ -158,6 +162,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         jScrollPaneAddress.setViewportView(addressTA);
         cccdField = new JTextField(15);
         sdtField = new JTextField(15);
+        searchField=new JTextField(15);
         
         // roomtypes show test
         l_RoomTypes = new JComboBox<>();
@@ -183,15 +188,18 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(editCustomerBtn);
         panel.add(deleteCustomerBtn);
         panel.add(clearBtn);
+
         panel.add(sortCustomerByPriceBtn);
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
+        panel.add(searchButton);
+
         panel.add(addRoom); // Add addRoom button to panel
         panel.add(roomTypesLabel);
         panel.add(lRoomLabel); // Add new label to panel
         panel.add(checkInLabel); // Add new label to panel
         panel.add(checkOutLabel); // Add new label to panel
-
+        panel.add(searchLabel);//add search label
         
         panel.add(idLabel);
         panel.add(nameLabel);
@@ -210,7 +218,10 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(l_Rooms);// add rooms to panel
         panel.add(CheckIn);//add CheckIn
         panel.add(CheckOut);//add CheckOut
-        //label
+        panel.add(searchField);//search field
+
+
+        //label layout
         layout.putConstraint(SpringLayout.WEST, idLabel, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, idLabel, 10, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, nameLabel, 10, SpringLayout.WEST, panel);
@@ -231,7 +242,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, checkOutLabel, 260, SpringLayout.NORTH, panel); // Position new label
         layout.putConstraint(SpringLayout.WEST, lRoomLabel, 10, SpringLayout.WEST, panel); // Position new label
         layout.putConstraint(SpringLayout.NORTH, lRoomLabel, 290, SpringLayout.NORTH, panel); // Position new label
-        
+        layout.putConstraint(SpringLayout.WEST, searchLabel, 300, SpringLayout.WEST, panel); 
+        layout.putConstraint(SpringLayout.NORTH, searchLabel, 10, SpringLayout.NORTH, panel);
         
         //Fiels
         layout.putConstraint(SpringLayout.WEST, idField, 100, SpringLayout.WEST, panel);
@@ -254,31 +266,32 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, CheckOut, 260, SpringLayout.NORTH, panel); // Position new field
         layout.putConstraint(SpringLayout.WEST, l_Rooms, 100, SpringLayout.WEST, panel); // Position new field
         layout.putConstraint(SpringLayout.NORTH, l_Rooms, 290, SpringLayout.NORTH, panel); // Position new field
-
+        layout.putConstraint(SpringLayout.WEST, searchField, 370, SpringLayout.WEST, panel); // Position new field
+        layout.putConstraint(SpringLayout.NORTH, searchField, 10, SpringLayout.NORTH, panel); // Position new field
 
         layout.putConstraint(SpringLayout.WEST, jScrollPaneCustomerTable, 300, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, jScrollPaneCustomerTable, 10, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, jScrollPaneCustomerTable, 40, SpringLayout.NORTH, panel);
         
         layout.putConstraint(SpringLayout.WEST, addCustomerBtn, 20, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, addCustomerBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, editCustomerBtn, 60, SpringLayout.WEST, addCustomerBtn);
         layout.putConstraint(SpringLayout.NORTH, editCustomerBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, deleteCustomerBtn, 60, SpringLayout.WEST, editCustomerBtn);
-        
         layout.putConstraint(SpringLayout.NORTH, clearBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, clearBtn, 80, SpringLayout.WEST, deleteCustomerBtn);
-        
         layout.putConstraint(SpringLayout.NORTH, deleteCustomerBtn, 360, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortCustomerByPriceBtn, 300, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, sortCustomerByPriceBtn, 360, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, sortCustomerByPriceBtn, 390, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortCustomerNameBtn, 115, SpringLayout.WEST, sortCustomerByPriceBtn);
-        layout.putConstraint(SpringLayout.NORTH, sortCustomerNameBtn, 360, SpringLayout.NORTH, panel);
-        
+        layout.putConstraint(SpringLayout.NORTH, sortCustomerNameBtn, 390, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, navigateToRoomViewBtn, 115, SpringLayout.WEST, sortCustomerNameBtn); // Position new button
-        layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 360, SpringLayout.NORTH, panel); // Position new button
-        
+        layout.putConstraint(SpringLayout.NORTH, navigateToRoomViewBtn, 390, SpringLayout.NORTH, panel); // Position new button
         layout.putConstraint(SpringLayout.WEST, addRoom, 20, SpringLayout.WEST, panel); // Position addRoom button
         layout.putConstraint(SpringLayout.NORTH, addRoom, 390, SpringLayout.NORTH, panel); // Position addRoom button
+        layout.putConstraint(SpringLayout.WEST, searchButton, 520, SpringLayout.WEST, panel); // Position search button
+        layout.putConstraint(SpringLayout.NORTH, searchButton, 10, SpringLayout.NORTH, panel); // Position search button
+        
+        
         this.add(panel);
         this.pack();
         this.setTitle("Customer Information");
@@ -416,7 +429,12 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         addCustomerBtn.setEnabled(true);
         addRoom.setEnabled(false);
     }
-    
+    //lay tu khoa
+    public String getKeyWord(){
+        return searchField.getText().trim();
+    }
+
+
     //Tinh so ngay thue
     public static int calculateDaysBetween(Date startDate, Date endDate) {
         // Convert Date to LocalDate
@@ -602,5 +620,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     }
     public void addAddRoomListener(ActionListener listener){
         addRoom.addActionListener(listener);
+    }
+    public void addSearchListener(ActionListener listener){
+        searchButton.addActionListener(listener);
     }
 }

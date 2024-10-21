@@ -42,7 +42,7 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
     }
 
     private void initComponents() {
-        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         // khởi tạo các phím chức năng
 
         // khởi tạo bảng room

@@ -150,4 +150,32 @@ public class CustomerDao {
     public void setListCustomers(List<Customer> listCustomers) {
         this.listCustomers = listCustomers;
     }
+    public List<Customer> searchCustomer(String keyword){
+        if (keyword.isEmpty()) {
+            return listCustomers;
+        }
+        List<Customer> result=new ArrayList<Customer>();
+        for(Customer customer:listCustomers){
+            if(customer.getName().contains(keyword)){
+                result.add(customer);
+            }
+            else if (customer.getCccd().contains(keyword)){
+                result.add(customer);
+            }
+            else if (customer.getSdt().contains(keyword)){
+                result.add(customer);
+            }
+            else if (customer.getAddress().contains(keyword)){
+                result.add(customer);
+            }
+            else if (String.valueOf(customer.getAge()).contains(keyword)){
+                result.add(customer);
+            }
+            else if (String.valueOf(customer.getId()).contains(keyword)){
+                result.add(customer);
+            }
+        }
+        
+        return result;
+    }
 }

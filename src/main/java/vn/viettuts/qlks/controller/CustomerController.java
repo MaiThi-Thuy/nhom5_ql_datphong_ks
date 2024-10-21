@@ -51,6 +51,7 @@ public class CustomerController {
         view.addRoomtypesListener(new RoomTypesListener());// RoomTypes listener
         view.addClickRoomListener(new ClickRoomListener()); //ClickRoomListener
         view.addAddRoomListener(new AddRoom2CustomerListener());
+        view.addSearchListener(new SearchCustomer());
     }
 
     public void showCustomerView() {
@@ -264,6 +265,14 @@ public class CustomerController {
                 customerView.showMessage("Đặt phòng thành công!");
             }
         }
-
+    }
+    class SearchCustomer implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            try {
+                customerView.showListCustomers(customerDao.searchCustomer(customerView.getKeyWord()),roomDao);
+            } catch (ParseException ex) {
+                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
