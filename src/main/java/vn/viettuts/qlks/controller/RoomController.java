@@ -24,8 +24,7 @@ public class RoomController {
         view.addEdiRoomListener(new EditRoomListener());
         view.addDeleteRoomListener(new DeleteRoomListener());
         view.addClearListener(new ClearRoomListener());
-        //view.addSortRoomCCCDListener(new SortRoomCCCDListener());
-        view.addSortRoomNameListener(new SortRoomNameListener());
+        view.addSortRoomPriceListener(new SortRoomPriceListener());
         view.addListRoomSelectionListener(new ListRoomSelectionListener());
         view.addNavigateToCustomerViewListener( new NavigateCustomerListener());
     }
@@ -109,25 +108,13 @@ public class RoomController {
      * 
      * @author viettuts.vn
      */
-//    class SortRoomCCCDListener implements ActionListener {
-//        public void actionPerformed(ActionEvent e) {
-//            roomDao.sortRoomByCCCD();
-//            roomView.showListRooms(roomDao.getListRooms());
-//        }
-//    }
+   class SortRoomPriceListener implements ActionListener {
+       public void actionPerformed(ActionEvent e) {
+           roomDao.sortRoomByPrice();
+           roomView.showListRooms(roomDao.getListRooms());
+       }
+   }
 
-    /**
-     * Lớp SortRoomCCCDListener 
-     * chứa cài đặt cho sự kiện click button "Sort By Name"
-     * 
-     * @author viettuts.vn
-     */
-    class SortRoomNameListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            roomDao.sortRoomByName();
-            roomView.showListRooms(roomDao.getListRooms());
-        }
-    }
 
     /**
      * Lớp ListRoomSelectionListener 

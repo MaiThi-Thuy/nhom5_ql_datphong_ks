@@ -132,28 +132,17 @@ public class RoomDao {
         return false;
     }
 
+
     /**
-     * sắp xếp danh sách room theo name theo tứ tự tăng dần
+     * sắp xếp danh sách room theo Price theo tứ tự tăng dần
      */
-    public void sortRoomByName() {
+    public void sortRoomByPrice() {
         Collections.sort(listRooms, new Comparator<Room>() {
             public int compare(Room room1, Room room2) {
-//                return room1.getName().compareTo(room2.getName());
-                    return 1;
+                return Double.compare(room1.getPrice(), room2.getPrice());
             }
         });
     }
-
-    /**
-     * sắp xếp danh sách room theo CCCD theo tứ tự tăng dần
-     */
-//    public void sortRoomByCCCD() {
-//        Collections.sort(listRooms, new Comparator<Room>() {
-//            public int compare(Room room1, Room room2) {
-//                return Float.compare(room1.getCccd(), room2.getCccd());
-//            }
-//        });
-//    }
 
     public List<Room> getListRooms() {
         return listRooms;

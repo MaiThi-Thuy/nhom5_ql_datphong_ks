@@ -30,7 +30,6 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
     private JButton deleteRoomBtn;
     private JButton clearBtn;
     private JButton sortRoomPriceBtn;
-    private JButton sortRoomNameBtn;
     private JButton navigateToCustomerViewBtn; // New button
     private JScrollPane jScrollPaneRoomTable;
     private JScrollPane jScrollPaneAddress;
@@ -64,7 +63,6 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         deleteRoomBtn = new JButton("Delete");
         clearBtn = new JButton("Clear");
         sortRoomPriceBtn = new JButton("Sort By Price");
-        sortRoomNameBtn = new JButton("Sort By Name");
         navigateToCustomerViewBtn = new JButton("Customers"); // Initialize new button
         // khởi tạo bảng room
         jScrollPaneRoomTable = new JScrollPane();
@@ -101,7 +99,6 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         panel.add(deleteRoomBtn);
         panel.add(clearBtn);
         panel.add(sortRoomPriceBtn);
-        panel.add(sortRoomNameBtn);
         panel.add(navigateToCustomerViewBtn); // Add new button to panel
         
         panel.add(idLabel);
@@ -148,8 +145,6 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
         layout.putConstraint(SpringLayout.NORTH, deleteRoomBtn, 270, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, sortRoomPriceBtn, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, sortRoomPriceBtn, 330, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, sortRoomNameBtn, 115, SpringLayout.WEST, sortRoomPriceBtn);
-        layout.putConstraint(SpringLayout.NORTH, sortRoomNameBtn, 330, SpringLayout.NORTH, panel);
         
         layout.putConstraint(SpringLayout.WEST, navigateToCustomerViewBtn, 20, SpringLayout.WEST, panel); // Set layout for new button
         layout.putConstraint(SpringLayout.NORTH, navigateToCustomerViewBtn, 310, SpringLayout.NORTH, panel); // Set layout for new button
@@ -315,10 +310,7 @@ public class RoomView extends JFrame implements ActionListener, ListSelectionLis
     public void addSortRoomPriceListener(ActionListener listener) {
         sortRoomPriceBtn.addActionListener(listener);
     }
-    
-    public void addSortRoomNameListener(ActionListener listener) {
-        sortRoomNameBtn.addActionListener(listener);
-    }
+
     
     public void addListRoomSelectionListener(ListSelectionListener listener) {
         roomTable.getSelectionModel().addListSelectionListener(listener);
