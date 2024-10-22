@@ -1,7 +1,9 @@
 # Quản lý khách hàng đặt phòng khách sạn
 
 ## Bộ Code Version 1
-
+Nhóm 5:
+Nguyễn Văn Hiếu:22010509
+Mai Thị Thủy:23010362
 1. Tài khoản login
 username: admin
 password: admin
