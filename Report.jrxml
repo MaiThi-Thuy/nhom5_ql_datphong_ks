@@ -1,0 +1,76 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Report" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be5e29ba-a55d-4456-a753-dfeee98c76d3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="khachthang" class="java.lang.String"/>
+	<parameter name="doanhthuthang" class="java.lang.String"/>
+	<parameter name="tongkhach" class="java.lang.String"/>
+	<parameter name="pic1" class="java.awt.image.BufferedImage"/>
+	<parameter name="tongdoanhthu" class="java.lang.String"/>
+	<parameter name="pic2" class="java.awt.image.BufferedImage"/>
+	<parameter name="pic3" class="java.awt.image.BufferedImage"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="tongdoanhthu" class="java.lang.String"/>
+	<field name="tongkhach" class="java.lang.String"/>
+	<field name="doanhthuthang" class="java.lang.String"/>
+	<field name="khachthang" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title height="71" splitType="Stretch">
+		<element kind="staticText" uuid="e5b4ebd7-7884-49aa-a90b-9dca469ecec0" x="200" y="40" width="170" height="30" markup="none" fontSize="15.0">
+			<text><![CDATA[BAO CAO DOANH THU]]></text>
+		</element>
+	</title>
+	<columnHeader height="78" splitType="Stretch">
+		<element kind="textField" uuid="222c8d26-af3e-4d1f-bf98-2339c6a65193" x="30" y="40" width="100" height="19" markup="none">
+			<expression><![CDATA[$P{tongdoanhthu}]]></expression>
+		</element>
+		<element kind="textField" uuid="5b49ae77-0f2b-4e6b-a6c6-6a4a9a14cd46" x="140" y="40" width="120" height="30" markup="none">
+			<expression><![CDATA[$P{tongkhach}]]></expression>
+		</element>
+		<element kind="textField" uuid="bf4aa588-2925-480c-ae46-a9aa4d24f8e5" x="275" y="40" width="100" height="30" markup="none">
+			<expression><![CDATA[$P{doanhthuthang}]]></expression>
+		</element>
+		<element kind="textField" uuid="c6bc5772-f6ce-4d4f-8a02-a59687b81737" x="405" y="40" width="100" height="30" markup="none">
+			<expression><![CDATA[$P{khachthang}]]></expression>
+		</element>
+		<element kind="staticText" uuid="a53d2af1-181e-4d6b-b1e9-9fd634cdc560" x="30" y="10" width="100" height="30" markup="none">
+			<text><![CDATA[TONG DOANH THU]]></text>
+		</element>
+		<element kind="staticText" uuid="84a639db-9700-4128-84d8-9e711b03f8cd" x="140" y="10" width="100" height="30" markup="none">
+			<text><![CDATA[TONG KHACH HANG]]></text>
+		</element>
+		<element kind="staticText" uuid="8684ce4b-d33c-41c1-9a76-da468ba8d850" x="275" y="10" width="130" height="30" markup="none">
+			<text><![CDATA[DOANH THU THANG NAY]]></text>
+		</element>
+		<element kind="staticText" uuid="0b00226f-985f-42e2-b8be-56ef5765be29" x="405" y="10" width="139" height="30" markup="none">
+			<text><![CDATA[TONG KHACH THANG NAY]]></text>
+		</element>
+		<element kind="line" uuid="29976801-b144-4118-9e84-c4d3fb4d69c3" positionType="FixRelativeToBottom" x="20" y="38" width="524" height="1"/>
+		<element kind="line" uuid="06b4743b-b1b6-4ea2-97e6-d121e4ed7254" positionType="FixRelativeToBottom" x="20" y="-1" width="524" height="1"/>
+		<element kind="line" uuid="9e3e53d2-50a7-4d94-8b6e-5962850d3b9c" positionType="FixRelativeToBottom" x="20" y="0" width="1" height="69"/>
+		<element kind="line" uuid="e040ed8f-1631-44b6-ad9b-bcfb33a1f1fa" positionType="FixRelativeToBottom" x="20" y="67" width="524" height="1"/>
+		<element kind="line" uuid="0d6ad139-98a0-4ac0-b1be-0b239374a39e" positionType="FixRelativeToBottom" x="130" y="0" width="1" height="69"/>
+		<element kind="line" uuid="568474f9-09e8-4718-b413-3d7589e74d9d" positionType="FixRelativeToBottom" x="260" y="0" width="1" height="69"/>
+		<element kind="line" uuid="b1a2aa7e-1227-493f-9fa1-a463c0edd54f" positionType="FixRelativeToBottom" x="400" y="0" width="1" height="69"/>
+		<element kind="line" uuid="d29a4395-7b35-4253-97f3-70d533d9ffbd" positionType="FixRelativeToBottom" x="544" y="-2" width="1" height="69"/>
+	</columnHeader>
+	<detail>
+		<band height="599" splitType="Stretch">
+			<element kind="image" uuid="ac8621e3-4a28-4e12-8e29-ad9b3ec9ae1e" x="0" y="0" width="555" height="201">
+				<expression><![CDATA[$P{pic3}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="3eabc6df-094b-40ba-8dd3-666f29e06d24" x="0" y="201" width="555" height="199">
+				<expression><![CDATA[$P{pic1}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="image" uuid="86bf23af-7dd4-4715-89c1-a4ff89a8d498" x="0" y="400" width="555" height="199">
+				<expression><![CDATA[$P{pic2}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+		</band>
+	</detail>
+</jasperReport>

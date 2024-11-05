@@ -2,7 +2,6 @@ package vn.viettuts.qlks.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,7 +10,7 @@ import java.io.IOException;
 public class FileUtils {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+    
     /**
      * Chuyển đổi đối tượng object về định dạng JSON
      * Sau đó lưu vào fileName

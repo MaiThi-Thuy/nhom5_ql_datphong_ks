@@ -9,14 +9,16 @@ import javax.swing.event.ListSelectionListener;
 
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Room;
+import vn.viettuts.qlks.entity.User;
 import vn.viettuts.qlks.view.CustomerView;
 import vn.viettuts.qlks.view.RoomView;
 
 public class RoomController {
     private RoomDao roomDao;
     private RoomView roomView;
-
-    public RoomController(RoomView view) {
+    private User curUser;
+    public RoomController(RoomView view,User curUser) {
+        this.curUser=curUser;
         this.roomView = view;
         roomDao = new RoomDao();
 
@@ -131,7 +133,7 @@ public class RoomController {
         @Override
         public void actionPerformed(ActionEvent e) {
             CustomerView customerView = new CustomerView();
-                CustomerController customerController = new CustomerController(customerView);
+                CustomerController customerController = new CustomerController(customerView,curUser);
                 customerController.showCustomerView();
             roomView.setVisible(false);
         }

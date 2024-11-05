@@ -36,6 +36,29 @@
     <artifactId>jcalendar</artifactId>
     <version>1.4</version>
         </dependency>
+       <dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports-fonts</artifactId>
+    <version>7.0.1</version> <!-- Adjust version if needed -->
+    
+</dependency>
+<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports-pdf</artifactId>
+    <version>7.0.1</version>
+</dependency>
+<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports</artifactId>
+    <version>7.0.1</version> <!-- Adjust version if needed -->
+</dependency>
+        <dependency>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+
         </dependencies>
     <build>
         <plugins>

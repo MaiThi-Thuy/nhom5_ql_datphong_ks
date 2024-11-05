@@ -38,7 +38,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import vn.viettuts.qlks.entity.Room;
+
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Customer;
 
@@ -52,6 +52,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JButton sortCustomerNameBtn;
     private JButton navigateToRoomViewBtn; // New button
     private JButton addRoom; // New button addRoom
+    private JButton logoutBut; // New button logout
     private JScrollPane jScrollPaneCustomerTable;
     private JScrollPane jScrollPaneAddress;
     private SimpleDateFormat DateF;
@@ -59,6 +60,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     private JDateChooser CheckIn; // calendar
     private JDateChooser CheckOut;
     private JButton searchButton;
+    private JButton ThongKeButton;
 
     private JLabel idLabel;
     private JLabel nameLabel;
@@ -124,7 +126,9 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         sortCustomerByPriceBtn = new JButton("Sort By Don gia");
         sortCustomerNameBtn = new JButton("Sort By Name");
         navigateToRoomViewBtn = new JButton("Rooms"); // Initialize new button
-        addRoom = new JButton("DatPhong"); // Initialize addRoom button
+        ThongKeButton=new JButton("Thong Ke");
+
+        addRoom = new JButton("Dat Phong"); // Initialize addRoom button
         CheckIn=new JDateChooser(); //Them checkIn
         CheckOut=new JDateChooser();//CheckOut
         CheckIn.setPreferredSize(new Dimension(135, 20));//setSize
@@ -133,6 +137,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         CheckOut.setDateFormatString("dd/MM/yyyy");
         DateF= new SimpleDateFormat("dd/MM/yyyy");
         searchButton=new JButton("Search");
+        logoutBut=new JButton("Logout");
         
         // khởi tạo bảng customer
         jScrollPaneCustomerTable = new JScrollPane();
@@ -141,7 +146,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         idLabel = new JLabel("Id");
         nameLabel = new JLabel("Ten");
         ageLabel = new JLabel("Tuoi");
-        addressLabel = new JLabel("DiaChi");
+        addressLabel = new JLabel("Dia Chi");
         cccdLabel = new JLabel("CCCD");
         sdtLabel = new JLabel("SDT");
         roomTypesLabel = new JLabel("Room Type");
@@ -193,6 +198,8 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         panel.add(sortCustomerNameBtn);
         panel.add(navigateToRoomViewBtn); // Add new button to panel
         panel.add(searchButton);
+        panel.add(ThongKeButton);
+        panel.add(logoutBut);
 
         panel.add(addRoom); // Add addRoom button to panel
         panel.add(roomTypesLabel);
@@ -290,8 +297,11 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         layout.putConstraint(SpringLayout.NORTH, addRoom, 390, SpringLayout.NORTH, panel); // Position addRoom button
         layout.putConstraint(SpringLayout.WEST, searchButton, 520, SpringLayout.WEST, panel); // Position search button
         layout.putConstraint(SpringLayout.NORTH, searchButton, 10, SpringLayout.NORTH, panel); // Position search button
-        
-        
+        layout.putConstraint(SpringLayout.WEST, ThongKeButton, 600, SpringLayout.WEST, panel); // Position ThongKe button
+        layout.putConstraint(SpringLayout.NORTH, ThongKeButton, 390, SpringLayout.NORTH, panel); // Position ThongKe button
+        layout.putConstraint(SpringLayout.WEST, logoutBut, 700, SpringLayout.WEST, panel); // Position logout button
+        layout.putConstraint(SpringLayout.NORTH, logoutBut, 390, SpringLayout.NORTH, panel); // Position logout button
+
         this.add(panel);
         this.pack();
         this.setTitle("Customer Information");
@@ -642,5 +652,11 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
     }
     public void addSearchListener(ActionListener listener){
         searchButton.addActionListener(listener);
+    }
+    public void addThongKeListener(ActionListener listener){
+        ThongKeButton.addActionListener(listener);
+    }
+    public void addLogoutListener(ActionListener listener){
+        logoutBut.addActionListener(listener);
     }
 }

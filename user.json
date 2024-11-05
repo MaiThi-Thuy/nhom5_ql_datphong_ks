@@ -1,0 +1,14 @@
+{
+  "user": [
+    {
+      "userName": "admin",
+      "password": "Z6/J0qZTTsY3iXGhdIho5A\u003d\u003d",
+      "role": "admin"
+    },
+    {
+      "userName": "employee",
+      "password": "5TEQVui/doGYPQ/sZdV0VA\u003d\u003d",
+      "role": "employee"
+    }
+  ]
+}

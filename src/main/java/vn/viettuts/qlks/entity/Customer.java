@@ -1,7 +1,7 @@
 package vn.viettuts.qlks.entity;
 
 import java.io.Serializable;
-
+import vn.viettuts.qlks.entity.Room;
 import java.util.*;
 
 public class Customer implements Serializable {
@@ -14,14 +14,14 @@ public class Customer implements Serializable {
     private String sdt;
     private Date checkIn;
     private Date checkOut;
-    private List<String> ID_room; 
+    private List<Room> RoomS; 
     private double totalPrice;
 
     public Customer() {
-        this.ID_room = new ArrayList<String>(); // Initialize ID_room
+        this.RoomS = new ArrayList<Room>(); // Initialize ID_room
     }
 
-    public Customer(int id, String name, byte age, String address, String cccd, String sdt, Date checkIn, Date checkOut, List<String> ID_room) {
+    public Customer(int id, String name, byte age, String address, String cccd, String sdt, Date checkIn, Date checkOut, List<Room> ID_room) {
         super();
         this.id = id;
         this.name = name;
@@ -31,7 +31,7 @@ public class Customer implements Serializable {
         this.sdt = sdt;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.ID_room = ID_room; // Initialize ID_room
+        this.RoomS = ID_room; // Initialize ID_room
         this.totalPrice = 0;
     }
 
@@ -99,12 +99,12 @@ public class Customer implements Serializable {
         this.checkOut = checkOut;
     }
 
-    public List<String> getID_room() {
-        return ID_room;
+    public List<Room> getID_room() {
+        return RoomS;
     }
 
-    public void setID_room(List<String> ID_room) {
-        this.ID_room = ID_room;
+    public void setID_room(List<Room> ID_room) {
+        this.RoomS = ID_room;
     }
     public double getTotalPrice() {
         return totalPrice;
@@ -116,6 +116,6 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer [id=" + id + ", name=" + name + ", age=" + age +
                ", address=" + address + ", cccd=" + cccd + ", sdt=" + sdt +
-               ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", ID_room=" + ID_room + "]"; 
+               ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", ID_room=" + RoomS + "]"; 
     }
 }

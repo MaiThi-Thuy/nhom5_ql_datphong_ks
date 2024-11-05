@@ -1,13 +1,24 @@
 package vn.viettuts.qlks.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
 
 import vn.viettuts.qlks.entity.Customer;
 import vn.viettuts.qlks.entity.CustomerJSON;
+import vn.viettuts.qlks.entity.Room;
 import vn.viettuts.qlks.utils.FileUtils;
+import vn.viettuts.qlks.view.CustomerView;
+import vn.viettuts.qlks.view.RoomView;
 
 /**
  * CustomerDao class
@@ -146,7 +157,7 @@ public class CustomerDao {
     public List<Customer> getListCustomers() {
         return listCustomers;
     }
-
+    
     public void setListCustomers(List<Customer> listCustomers) {
         this.listCustomers = listCustomers;
     }
@@ -178,4 +189,55 @@ public class CustomerDao {
         
         return result;
     }
+
+    public DefaultCategoryDataset PriceTypesDataSet(List<Customer>c){
+        Map<String,Double> m=new HashMap<>() {};
+        for(Customer cs:c){
+            for(Room r: cs.getID_room()){
+                    Double s=r.getPrice()*CustomerView.calculateDaysBetween(cs.getCheckIn(), cs.getCheckOut());
+                    m.put(r.getType(), m.getOrDefault(r.getType(), 0.0)+s);   
+            }
+        }
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(String s:m.keySet()){
+            dataset.addValue(m.get(s), s, s);
+        }
+        return dataset;
+    }
+
+     public TimeSeriesCollection TimeseriesDataset(List<Customer> customers) {
+        TimeSeries series = new TimeSeries("Doanh thu");
+        Map<Month, Double> monthlyRevenue = new HashMap<>();
+        for (Customer customer : customers) {
+            for (Room room : customer.getID_room()) {
+                double revenue = room.getPrice() * CustomerView.calculateDaysBetween(customer.getCheckIn(), customer.getCheckOut());;
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(customer.getCheckIn());
+                Month month = new Month(cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR));
+                monthlyRevenue.put(month, monthlyRevenue.getOrDefault(month, 0.0) + revenue);
+            }
+        }
+        for (Map.Entry<Month, Double> entry : monthlyRevenue.entrySet()) {
+            series.add(entry.getKey(), entry.getValue());
+        }
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(series);
+        return dataset;
+    }
+    public DefaultCategoryDataset FrequentDataset(List<Customer> customers) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        Map<String, Long> roomTypeCount = new HashMap<>();
+        for (Customer customer : customers) {
+            for (Room room : customer.getID_room()) {
+                String roomType = room.getType(); // Lấy loại phòng
+                roomTypeCount.put(roomType, roomTypeCount.getOrDefault(roomType, 0L) + 1);
+            }
+        }
+        for (Map.Entry<String, Long> entry : roomTypeCount.entrySet()) {
+            dataset.addValue(entry.getValue(), entry.getKey(), entry.getKey());
+        }
+
+        return dataset;
+    }
+    
 }

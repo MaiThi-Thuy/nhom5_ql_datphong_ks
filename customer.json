@@ -1,76 +1,136 @@
 {
   "customer": [
     {
-      "id": 2,
-      "name": "Hoang",
+      "id": 1,
+      "name": "Hieu",
       "age": 20,
-      "address": "Luong Son",
-      "cccd": "0123456789",
-      "sdt": "0123456789",
-      "checkIn": "Oct 20, 2024, 12:00:00 AM",
-      "checkOut": "Oct 31, 2024, 12:00:00 AM",
-      "ID_room": [
-        "4",
-        "2"
+      "address": "Ha Noi",
+      "cccd": "0012318293",
+      "sdt": "0130876139",
+      "checkIn": "Oct 28, 2024, 12:00:00 AM",
+      "checkOut": "Nov 19, 2024, 12:00:00 AM",
+      "RoomS": [
+        {
+          "id": 8,
+          "type": "Normal",
+          "price": 100000.0,
+          "status": false
+        }
       ],
-      "totalPrice": 275000.0
+      "totalPrice": 2200000.0
     },
     {
       "id": 3,
-      "name": "Son",
-      "age": 19,
-      "address": "Son La",
-      "cccd": "0123458769",
-      "sdt": "0123458769",
-      "checkIn": "Oct 20, 2024, 11:10:52 PM",
-      "checkOut": "Oct 31, 2024, 12:00:00 AM",
-      "ID_room": [
-        "0"
-      ],
-      "totalPrice": 110000.0
-    },
-    {
-      "id": 1,
-      "name": "Hieu",
-      "age": 21,
-      "address": "HaNoi",
+      "name": "Long",
+      "age": 20,
+      "address": "Thanh Hoa",
       "cccd": "0012345678",
-      "sdt": "0123456781",
-      "checkIn": "Oct 1, 2024, 12:00:00 AM",
-      "checkOut": "Oct 31, 2024, 12:00:00 AM",
-      "ID_room": [
-        "1",
-        "5"
+      "sdt": "0123456789",
+      "checkIn": "Dec 28, 2024, 12:00:00 AM",
+      "checkOut": "Jan 8, 2025, 12:00:00 AM",
+      "RoomS": [
+        {
+          "id": 3,
+          "type": "VIP",
+          "price": 130000.0,
+          "status": false
+        }
       ],
-      "totalPrice": 750000.0
+      "totalPrice": 1430000.0
     },
     {
       "id": 4,
-      "name": "Cuong",
-      "age": 20,
-      "address": "Hai Phong",
-      "cccd": "0123458769",
-      "sdt": "0123458769",
-      "checkIn": "Oct 1, 2024, 11:12:05 PM",
-      "checkOut": "Oct 31, 2024, 11:12:08 PM",
-      "ID_room": [
-        "3"
+      "name": "Hai",
+      "age": 22,
+      "address": "Ha Noi",
+      "cccd": "0012345678",
+      "sdt": "0123456789",
+      "checkIn": "Jan 28, 2024, 3:26:42 PM",
+      "checkOut": "Jan 31, 2024, 3:26:46 PM",
+      "RoomS": [
+        {
+          "id": 4,
+          "type": "VIP",
+          "price": 130000.0,
+          "status": false
+        }
+      ],
+      "totalPrice": 390000.0
+    },
+    {
+      "id": 5,
+      "name": "Hoa",
+      "age": 23,
+      "address": "Ha Noi",
+      "cccd": "0012345678",
+      "sdt": "0123456789",
+      "checkIn": "Feb 28, 2024, 3:26:42 PM",
+      "checkOut": "Mar 2, 2024, 3:26:46 PM",
+      "RoomS": [
+        {
+          "id": 5,
+          "type": "Normal",
+          "price": 100000.0,
+          "status": false
+        }
       ],
       "totalPrice": 300000.0
     },
     {
-      "id": 5,
+      "id": 6,
       "name": "Nam",
-      "age": 20,
-      "address": "Ninh Binh",
-      "cccd": "0123456789",
+      "age": 23,
+      "address": "Ha Noi",
+      "cccd": "0012345678",
       "sdt": "0123456789",
-      "checkIn": "Oct 21, 2024, 12:00:00 AM",
-      "checkOut": "Oct 24, 2024, 10:23:52 PM",
-      "ID_room": [
-        "6"
+      "checkIn": "Mar 28, 2024, 12:00:00 AM",
+      "checkOut": "Mar 31, 2024, 12:00:00 AM",
+      "RoomS": [
+        {
+          "id": 6,
+          "type": "Normal",
+          "price": 100000.0,
+          "status": false
+        },
+        {
+          "id": 9,
+          "type": "Normal",
+          "price": 100000.0,
+          "status": false
+        },
+        {
+          "id": 10,
+          "type": "Normal",
+          "price": 100000.0,
+          "status": false
+        }
       ],
-      "totalPrice": 30000.0
+      "totalPrice": 900000.0
+    },
+    {
+      "id": 7,
+      "name": "Hong",
+      "age": 25,
+      "address": "Ha Noi",
+      "cccd": "0012345678",
+      "sdt": "0123456789",
+      "checkIn": "Apr 28, 2024, 3:26:42 PM",
+      "checkOut": "May 1, 2024, 3:26:46 PM",
+      "RoomS": [
+        {
+          "id": 7,
+          "type": "Normal",
+          "price": 100000.0,
+          "status": false
+        },
+        {
+          "id": 11,
+          "type": "VIP",
+          "price": 120000.0,
+          "status": false
+        }
+      ],
+      "totalPrice": 660000.0
     }
   ]
 }

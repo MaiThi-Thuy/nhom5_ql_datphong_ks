@@ -41,7 +41,7 @@ public class CustomerRoomController {
     public void showCustomerRoomView(Customer customer) {
         this.customer = customer;
         crView.setTitle("Room of "+ customer.getName());
-        crView.showListRooms(roomDao.showListRooms(customer.getID_room()));
+        crView.showListRooms(customer.getID_room());
         crView.setVisible(true);
     }
 
@@ -53,11 +53,11 @@ public class CustomerRoomController {
     class HuyPhongListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int RoomId= crView.getSelectedRoomID();
-            Room room = roomDao.readListRooms().get(RoomId-1);
+            Room room = customer.getID_room().get(RoomId-1);
             room.setStatus(true);
+            customer.getID_room().remove(room);
+            List<Room> roomIds=customer.getID_room();
             roomDao.edit(room);
-            List<String> roomIds=customer.getID_room();
-            roomIds.remove(String.valueOf(RoomId-1));
             customer.setID_room(roomIds);
             customer.setTotalPrice(roomDao.roomPrice(customer.getID_room())*customerView.calculateDaysBetween(customer.getCheckIn(),customer.getCheckOut()));
             customerDao.edit(customer);
@@ -65,7 +65,7 @@ public class CustomerRoomController {
             customerView.addRooms(roomDao.getQLRoom().searchRooms(customerView.getRoomType()));
             customerView.showListCustomers(customerDao.getListCustomers(),roomDao);
             customerView.showMessage("Hủy phòng thành công!");
-            crView.showListRooms(roomDao.showListRooms(customer.getID_room()));
+            crView.showListRooms(customer.getID_room());
             
         }
     }

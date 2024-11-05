@@ -4,12 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -28,16 +23,21 @@ import vn.viettuts.qlks.dao.CustomerDao;
 import vn.viettuts.qlks.dao.RoomDao;
 import vn.viettuts.qlks.entity.Customer;
 import vn.viettuts.qlks.entity.Room;
+import vn.viettuts.qlks.entity.User;
 import vn.viettuts.qlks.view.CustomerRoomView;
 import vn.viettuts.qlks.view.CustomerView;
+import vn.viettuts.qlks.view.LoginView;
 import vn.viettuts.qlks.view.RoomView;
+import vn.viettuts.qlks.view.StatsView;
 public class CustomerController {
     //
     private CustomerDao customerDao;
     private CustomerView customerView;
     private RoomDao roomDao;
-    public CustomerController(CustomerView view) {
+    private User curUser;
+    public CustomerController(CustomerView view,User curUSer) {
         this.customerView = view;
+        this.curUser=curUSer;
         customerDao = new CustomerDao();
         roomDao= new RoomDao();
         view.addAddCustomerListener(new AddCustomerListener());
@@ -52,8 +52,12 @@ public class CustomerController {
         view.addClickRoomListener(new ClickRoomListener()); //ClickRoomListener
         view.addAddRoomListener(new AddRoom2CustomerListener());
         view.addSearchListener(new SearchCustomer());
+        view.addThongKeListener(new ThongkeView());
+        view.addLogoutListener(new LogoutListener());
     }
-
+    public User get_Cuser(){
+        return curUser;
+    }
     public void showCustomerView() {
         List<Customer> customerList = customerDao.getListCustomers();
         customerView.setVisible(true);
@@ -162,11 +166,15 @@ public class CustomerController {
     }
     class NavigateRoomListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            RoomView roomView = new RoomView();
-            RoomController roomController = new RoomController(roomView);
-            roomController.showRoomView();
-            //roomController.showSelectionRoomView();
-            customerView.setVisible(false);
+            if(curUser.getRole().equals("admin")){
+                RoomView roomView = new RoomView();
+                RoomController roomController = new RoomController(roomView,curUser);
+                roomController.showRoomView();
+                customerView.setVisible(false);
+            }
+            else{
+                customerView.showMessage("Bạn không có quyền truy cập");
+            }
         }
     }
 
@@ -228,7 +236,7 @@ public class CustomerController {
                 Customer customer =customerDao.searchCustomer(cID);
                 //customerView.showMessage(RoomId);
             if (customer != null) {
-                customer.getID_room().add(String.valueOf(RoomId_t-1));
+                customer.getID_room().add(room);
                 
                 room.setStatus(false);
                 roomDao.edit(room);
@@ -244,6 +252,27 @@ public class CustomerController {
     class SearchCustomer implements ActionListener{
         public void actionPerformed(ActionEvent e){
             customerView.showListCustomers(customerDao.searchCustomer(customerView.getKeyWord()),roomDao);
+        }
+    }
+    class ThongkeView implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if(curUser.getRole().equals("admin")){
+                StatsView statsView = new StatsView(curUser);
+                statsView.setVisible(true);
+                customerView.setVisible(false);
+            }
+            else{
+                customerView.showMessage("Bạn không có quyền truy cập");
+            }
+        }
+    }
+    class LogoutListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            customerView.showMessage("Đăng xuất thành công");
+            LoginView loginView = new LoginView();
+            LoginController loginController = new LoginController(loginView);
+            loginController.showLoginView();
+            customerView.setVisible(false);
         }
     }
 }

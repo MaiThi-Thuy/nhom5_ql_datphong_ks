@@ -71,12 +71,11 @@ public class RoomDao {
         writeListRooms(listRooms);
 
     } 
-    public double roomPrice(List<String> ID_room){
+    public double roomPrice(List<Room> ID_room){
         int price=0;
         double s=0;
-        for(String id:ID_room){
-           int idx=Integer.parseInt(id);
-           s+=listRooms.get(idx).getPrice();
+        for(Room r:ID_room){
+            s+=r.getPrice();
         }
         return s;
     }
@@ -97,15 +96,7 @@ public class RoomDao {
             }
         }
     }
-    //show list room by ids
-    public List<Room> showListRooms(List<String> ID_room){
-        List<Room> rooms=new ArrayList<Room>();
-        for(String id:ID_room){
-            int idx=Integer.parseInt(id);
-            rooms.add(listRooms.get(idx));
-        }
-        return rooms;
-    }
+    
     public QLRoom getQLRoom(){
         return this.qlRoom;
     }
@@ -150,5 +141,13 @@ public class RoomDao {
 
     public void setListRooms(List<Room> listRooms) {
         this.listRooms = listRooms;
+    }
+    public Room getRoom(String id){
+        for (Room room : listRooms) {
+            if (room.getId() == Integer.parseInt(id)) {
+                return room;
+            }
+        }
+        return null;
     }
 }
