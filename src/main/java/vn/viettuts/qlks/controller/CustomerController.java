@@ -230,6 +230,10 @@ public class CustomerController {
     class AddRoom2CustomerListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
                 String RoomId = customerView.getRoom();
+                if(RoomId.equals("")){
+                    customerView.showMessage("Chọn khách muốn thêm");
+                    return;
+                }
                 int RoomId_t=Integer.parseInt(RoomId);
                 Room room = roomDao.readListRooms().get(RoomId_t-1);
                 int cID= customerView.getSelectedCustomerID();

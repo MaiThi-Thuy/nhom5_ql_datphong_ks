@@ -83,7 +83,7 @@ public class CustomerRoomView extends JFrame implements ActionListener, ListSele
     }
     public int getSelectedRoomID(){
         int row = roomTable.getSelectedRow();
-        return (int) roomTable.getValueAt(row, 0);
+        return row;
     }
     public static String formatDoubleToString(double value) {
         // Create a DecimalFormat instance

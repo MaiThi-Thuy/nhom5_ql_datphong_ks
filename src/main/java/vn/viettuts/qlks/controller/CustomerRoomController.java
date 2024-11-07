@@ -53,7 +53,8 @@ public class CustomerRoomController {
     class HuyPhongListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int RoomId= crView.getSelectedRoomID();
-            Room room = customer.getID_room().get(RoomId-1);
+            System.out.println(RoomId);
+            Room room = customer.getID_room().get(RoomId);
             room.setStatus(true);
             customer.getID_room().remove(room);
             List<Room> roomIds=customer.getID_room();

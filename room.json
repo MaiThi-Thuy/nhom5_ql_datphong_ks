@@ -2,68 +2,20 @@
   "room": [
     {
       "id": 1,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": true
+      "type": "Thuong",
+      "price": 1000000.0,
+      "status": false
     },
     {
       "id": 2,
       "type": "VIP",
-      "price": 120000.0,
+      "price": 2000000.0,
       "status": false
     },
     {
       "id": 3,
-      "type": "VIP",
-      "price": 130000.0,
-      "status": false
-    },
-    {
-      "id": 4,
-      "type": "VIP",
-      "price": 130000.0,
-      "status": false
-    },
-    {
-      "id": 5,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": false
-    },
-    {
-      "id": 6,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": false
-    },
-    {
-      "id": 7,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": false
-    },
-    {
-      "id": 8,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": false
-    },
-    {
-      "id": 9,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": false
-    },
-    {
-      "id": 10,
-      "type": "Normal",
-      "price": 100000.0,
-      "status": false
-    },
-    {
-      "id": 11,
-      "type": "VIP",
-      "price": 120000.0,
+      "type": "Sieu Vip",
+      "price": 3000000.0,
       "status": false
     }
   ]

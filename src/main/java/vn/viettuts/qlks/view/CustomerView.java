@@ -438,7 +438,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         deleteCustomerBtn.setEnabled(false);
         // enable Add button
         addCustomerBtn.setEnabled(true);
-        addRoom.setEnabled(false);
+        addRoom.setEnabled(true);
     }
     //lay tu khoa
     public String getKeyWord(){
@@ -479,6 +479,7 @@ public class CustomerView extends JFrame implements ActionListener, ListSelectio
         // disable Add button
         addCustomerBtn.setEnabled(false);
         addRoom.setEnabled(true);
+        
     }
     
     /**
